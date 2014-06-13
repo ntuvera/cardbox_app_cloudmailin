@@ -2,8 +2,11 @@ Rails.application.routes.draw do
 
   root 'people#index'
 
-  # get '/messages/send' => 'emails#send_simple_message'
+  resources :emails
+
+  get '/messages/send' => 'emails#send_simple_message'
   post '/messages/receive' => 'emails#receive'
+
 
 
   resources :people
