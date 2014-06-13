@@ -9,6 +9,7 @@ class IncomingMailsController < ApplicationController
       :message => params[:plain],
       :attachment_url => params[:attachments][0]["url"]
     )
+    binding.pry
     if message.save
       render :text => 'Success', :status => 200
     else
