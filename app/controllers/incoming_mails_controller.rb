@@ -4,9 +4,9 @@ class IncomingMailsController < ApplicationController
     Rails.logger.info params
     message = Email.new(
       :to => params[:envelope][:to],
-      :from => params[:envelope][:from],
+      :sender => params[:envelope][:from],
       :subject => params[:headers]['Subject'],
-      :body => params[:plain]
+      :message => params[:plain]
     )
     if message.save
       render :text => 'Success', :status => 200
