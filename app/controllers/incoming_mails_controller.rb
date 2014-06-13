@@ -8,11 +8,12 @@ class IncomingMailsController < ApplicationController
     Rails.logger.log params[:html] # print the html decoded body to the logs if present
     Rails.logger.log params[:attachments][0] if params[:attachments] # A tempfile attachment if attachments is populated
 
-    if User.all.map(&:email).include? params[:from] # check if user is registered
-      @email = email.new
-      @email.body = params[:plain].split("\n").first
-      @email.user = User.where(:email => params[:from])
-      @email.date = DateTime.now
+    # if User.all.map(&:email).include? params[:from] # check if user is registered
+    #   @email = email.new
+    #   @email.body = params[:plain].split("\n").first
+    #   @email.user = User.where(:email => params[:from])
+    #   @email.date = DateTime.now
+    # end
 
       if @email.save
         render :text => 'Success', :status => 200
