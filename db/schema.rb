@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613212704) do
+ActiveRecord::Schema.define(version: 20140613224122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140613212704) do
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_name"
+    t.string   "attachment_url"
     t.string   "to"
   end
 
