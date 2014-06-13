@@ -6,7 +6,8 @@ class IncomingMailsController < ApplicationController
       :to => params[:envelope][:to],
       :sender => params[:envelope][:from],
       :subject => params[:headers]['Subject'],
-      :message => params[:plain]
+      :message => params[:plain],
+      :attachment_url => params[:url]
     )
     if message.save
       render :text => 'Success', :status => 200
