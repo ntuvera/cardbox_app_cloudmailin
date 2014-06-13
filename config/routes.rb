@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/messages/send' => 'emails#send_simple_message'
   post '/messages/receive' => 'emails#receive'
 
+  resources :incoming_mails
 
 
   resources :people
