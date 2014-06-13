@@ -1,0 +1,12 @@
+<%= form_for @email do |f| %>
+<%= f.label :sender %> <br>
+<%= f.text_field :sender %> <hr>
+<%= f.label :subject %> <br>
+<%= f.text_field :subject %><hr/>
+<%= f.label :message %> <br>
+<%= f.text_field :message %><hr/>
+<br/>
+<hr>
+<%= f.submit %>
+
+<% end %>
