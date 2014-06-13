@@ -391,3 +391,28 @@ Migrating to AddAttachmentNameToEmails (20140613180947)
   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140613180947"]]
   [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddImageToCards (20140613184031)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "cards" ADD COLUMN "image" character varying(255)[0m
+PG::UndefinedTable: ERROR:  relation "cards" does not exist
+: ALTER TABLE "cards" ADD COLUMN "image" character varying(255)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mCREATE DATABASE "test_mailer_development" ENCODING = 'unicode'[0m
+PG::DuplicateDatabase: ERROR:  database "test_mailer_development" already exists
+: CREATE DATABASE "test_mailer_development" ENCODING = 'unicode'
+  [1m[36m (0.4ms)[0m  [1mCREATE DATABASE "test_mailer_development" ENCODING = 'unicode'[0m
+PG::DuplicateDatabase: ERROR:  database "test_mailer_development" already exists
+: CREATE DATABASE "test_mailer_development" ENCODING = 'unicode'
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddImageToCards (20140613184031)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "cards" ADD COLUMN "image" character varying(255)[0m
+PG::UndefinedTable: ERROR:  relation "cards" does not exist
+: ALTER TABLE "cards" ADD COLUMN "image" character varying(255)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mCREATE DATABASE "test_mailer_development" ENCODING = 'unicode'[0m
+PG::DuplicateDatabase: ERROR:  database "test_mailer_development" already exists
+: CREATE DATABASE "test_mailer_development" ENCODING = 'unicode'
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

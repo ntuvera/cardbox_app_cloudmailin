@@ -16,10 +16,6 @@ ActiveRecord::Schema.define(version: 20140613180947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cuisines", force: true do |t|
-    t.string "type"
-  end
-
   create_table "emails", force: true do |t|
     t.string   "sender"
     t.string   "subject"
@@ -27,15 +23,6 @@ ActiveRecord::Schema.define(version: 20140613180947) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_name"
-  end
-
-  create_table "foods", force: true do |t|
-    t.string "name"
-  end
-
-  create_table "kittens", force: true do |t|
-    t.integer "width"
-    t.integer "height"
   end
 
   create_table "people", force: true do |t|

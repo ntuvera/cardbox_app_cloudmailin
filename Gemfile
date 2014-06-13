@@ -43,4 +43,6 @@ gem 'rails_12factor', group: :production
 
 gem 'rest-client', '~> 1.6.7'
 
+gem 'carrierwave'
+
 
