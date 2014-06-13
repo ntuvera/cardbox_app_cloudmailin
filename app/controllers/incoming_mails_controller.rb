@@ -8,8 +8,19 @@ class IncomingMailsController < ApplicationController
     Rails.logger.log params[:html] # print the html decoded body to the logs if present
     Rails.logger.log params[:attachments][0] if params[:attachments] # A tempfile attachment if attachments is populated
 
-    # Do some other stuff with the mail message
+    if User.all.map(&:email).include? params[:from] # check if user is registered
+      @email = email.new
+      @email.body = params[:plain].split("\n").first
+      @email.user = User.where(:email => params[:from])
+      @email.date = DateTime.now
 
-    render :text => 'success', :status => 200 # a status of 404 would reject the mail
+      if @email.save
+        render :text => 'Success', :status => 200
+      else
+        render :text => 'Internal failure', :status => 501
+      end
+    else
+      render :text => 'Unknown user', :status => 404 # 404 would reject the mail
+    end
   end
 end
