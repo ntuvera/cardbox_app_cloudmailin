@@ -8,7 +8,7 @@
 
 
 <% current_user.cards.each do |card| %>
-  <img src="<%= card.email.attachment_url %>">
+  <img class="business-card" src="<%= card.email.attachment_url %>">
   <p><%= card.email.message %></p>
 
 <% end %>

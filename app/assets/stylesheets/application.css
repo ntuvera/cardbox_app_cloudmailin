@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.business-card {
+  width: 300px;
+  height: 200px;
+}
