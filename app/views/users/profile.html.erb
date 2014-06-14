@@ -9,19 +9,23 @@
 </div>
 
 <div class="cards container">
+
   <% current_user.cards.each do |card| %>
-    <div class="saved cards">
-      <img class="business-card" src="<%= card.email.attachment_url %>">
-      <p><%= card.email.message %></p>
-    </div>
+  <div class="saved card">
+    <img class="business-card" src="<%= card.email.attachment_url %>">
+    <p><%= card.email.message %></p>
     <div class="contact info">
       <form>
         <input type="text" name="name" placeholder="John Smith">
         <input type="text" name="email" placeholder="JSmith@gmail.com">
-
+        <input type="text" name="linkedIn" placeholder="LinkedIn ID">
+        <input type="submit" type="update">
+        <!-- add more for fields for if including more data on contact -->
       </form>
     </div>
-    </div>
+  </div>
+
+</div>
 <% end %>
 
 </div>
