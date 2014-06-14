@@ -1,1 +1,12 @@
 <h1>index.html.erb</h1>
+
+<h2>All bcards</h2>
+
+
+<% @emails.each do |email| %>  
+
+    <ul>
+        <li><%= email.url %></li>
+    </ul>
+        
+<% end %>
