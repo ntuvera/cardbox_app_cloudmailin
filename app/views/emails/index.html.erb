@@ -5,6 +5,8 @@
 
 <% @emails.each do |email| %>
     <ul>
-        <li><%= email.attachment_url %></li>
+        <li><%= email.attachment_url %><img src="<%= email.attachment_url %>" alt="bcard picture"></li>
     </ul>        
 <% end %>
+
+<img src="http://pets.withzoo.com/wp-content/uploads/2013/04/Doggy-dogs-27377981-1595-1596.jpg" alt="bcard picture">
