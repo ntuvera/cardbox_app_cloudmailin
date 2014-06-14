@@ -14,8 +14,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    redirect_to login_path
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to profile_path
+    else
+      render:new
+    end
+  end
+
+  def profile
   end
 
   def edit

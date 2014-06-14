@@ -1,1 +1,27 @@
 <p>views/welcome/index.html.erb</p>
+
+
+<div class="welcome start">
+  <div>
+    <a href="/signup">Sign up</a>
+  <!-- <h2>Sign up for Cardbox App</h2>
+
+  <%= form_for @user do |f| %>
+    <%= f.text_field :email %>
+    <%= f.password_field :password %>
+    <%= f.submit %>
+  <% end %>
+ -->
+  </div>
+
+  <div>
+    <h2>Log-In to cardbox_app</h2>
+
+    <%= form_tag session_path do %>
+      <%= text_field_tag :email %>
+      <%= password_field_tag :password %>
+      <%= submit_tag %>
+    <% end %>
+
+  </div>
+</div>
