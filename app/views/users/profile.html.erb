@@ -1,0 +1,8 @@
+<p>profile.html.erb</p>
+
+<%= current_user.email %> is logged in.
+<form action="/logout" method='post'>
+  <%= token_tag %>
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn btn-primary" type='submit'>Log Out</button>
+</form>
