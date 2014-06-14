@@ -6,7 +6,7 @@
 <% @emails.each do |email| %>  
 
     <ul>
-        <li><%= email.attachment_url %></li>
+        <li><%= mail.attachment_url %><img src="<%= mail.attachment_url %>" alt=""></li>
     </ul>
         
 <% end %>
