@@ -14,11 +14,15 @@ class IncomingMailsController < ApplicationController
       )
 
       if message.save
-        render :text => 'Success', :status => 200
+        # render :text => 'Success', :status => 200
 
+        card = Card.new
+        if card.save
+          render :text => 'Success', :status => 200
+        else
+          render :text => "error while trying to save the card", :status => 422, :content_type => Mime::TEXT.to_s
+        end
 
-
-        
       else
         render :text => message.errors.full_messages, :status => 422, :content_type => Mime::TEXT.to_s
       end
