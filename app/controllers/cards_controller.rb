@@ -5,7 +5,7 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find(card_params[:id])
+    @card = Card.find(params[:id])
   end
 
   def new
@@ -19,16 +19,16 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card = Card.find(card_params[:id])
+    @card = Card.find(params[:id])
   end
 
   def update
-    edited_card = Card.find(card_params[:id])
+    edited_card = Card.find(params[:id])
     edited_card.update(card_params)
   end
 
   def destroy
-    Card.delete(card_params[:id])
+    Card.delete(params[:id])
     redirect_to card_path
   end
 
