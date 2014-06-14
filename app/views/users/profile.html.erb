@@ -5,4 +5,13 @@
   <%= token_tag %>
   <input type="hidden" name="_method" value="delete">
   <button class="btn btn-primary" type='submit'>Log Out</button>
+
+
+<% current_user.cards.each do |card| %>
+  <img src="<%= card.email.attachment_url %>">
+  <p><%= card.email.message %></p>
+
+<% end %>
+
+
 </form>
