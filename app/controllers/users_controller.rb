@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   def index
     @users = User.all
   end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    redirect_to users_path
+    redirect_to login_path
   end
 
   def edit
@@ -29,10 +29,10 @@ class UsersController < ApplicationController
 
   def destroy
     User.delete(params[:id])
-    redirect_to users_path
+    redirect_to login_path
   end
-
+private
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :password)
   end
 end

@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-  has_many  :cards
+  authenticates_with_sorcery!
+  has_many :cards
 end
