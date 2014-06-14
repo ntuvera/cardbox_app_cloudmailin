@@ -1,5 +1,5 @@
-<p>profile.html.erb</p>
-<div>
+
+<div class="profile header">
   <%= current_user.email %> is logged in.
   <form action="/logout" method='post'>
     <%= token_tag %>
@@ -8,11 +8,22 @@
   </form>
 </div>
 
-<% current_user.cards.each do |card| %>
-  <img class="business-card" src="<%= card.email.attachment_url %>">
-  <p><%= card.email.message %></p>
+<div class="cards container">
+  <% current_user.cards.each do |card| %>
+    <div class="saved cards">
+      <img class="business-card" src="<%= card.email.attachment_url %>">
+      <p><%= card.email.message %></p>
+    </div>
+    <div class="contact info">
+      <form>
+        <input type="text" name="name" placeholder="John Smith">
+        <input type="text" name="email" placeholder="JSmith@gmail.com">
 
+      </form>
+    </div>
+    </div>
 <% end %>
 
+</div>
 
 
