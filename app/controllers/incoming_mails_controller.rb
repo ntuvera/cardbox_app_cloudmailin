@@ -13,8 +13,7 @@ class IncomingMailsController < ApplicationController
         :attachment_url => params["attachments"]["0"]["url"]
       )
 
-      if message.save
-        # render :text => 'Success', :status => 200
+      if message.save       
 
         card = Card.new(
           :user_id => User.find_by(email: params[:envelope][:from]).id,
