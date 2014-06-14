@@ -2,7 +2,7 @@ class IncomingMailsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
     Rails.logger.info params
-
+    
     if User.find_by(email: params[:envelope][:from]) 
 
       message = Email.new(
@@ -16,7 +16,11 @@ class IncomingMailsController < ApplicationController
       if message.save
         # render :text => 'Success', :status => 200
 
-        card = Card.new
+        card = Card.new(
+          :user_id => User.find_by(email: params[:envelope][:from]).id,
+          :email_id => message.id
+          )
+        
         if card.save
           render :text => 'Success', :status => 200
         else
