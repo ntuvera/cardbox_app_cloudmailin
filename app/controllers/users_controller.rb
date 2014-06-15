@@ -16,9 +16,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to profile_path
+      redirect_to login_path #profile_path  
     else
-      render:new
+      render :new
     end
   end
 

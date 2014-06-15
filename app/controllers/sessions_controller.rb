@@ -10,11 +10,11 @@ class SessionsController < ApplicationController
     if token      
       @user = User.from_omniauth(env["omniauth.auth"])
       session[:user_id] = @user.id
-      # self.current_user = @user
+      #self.current_user = @user
       redirect_to profile_path  # login page
-    else      
-      @user = login(params[:email], params[:password])       
+    else   
 
+      @user = login(params[:email], params[:password])       
       if @user
         session[:user_id] = @user.id
         redirect_to profile_path

@@ -19,11 +19,16 @@ Rails.application.routes.draw do
   post '/sessions'  => 'sessions#create', as: 'session'
   delete '/logout'  => 'sessions#destroy', as: 'logout'  #can refer to as logout_path
 
+  # in case a user profile is being deleted without destroy the corresponding session:
+  get 'log_out' => 'sessions#destroy'
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   delete 'signout', to: 'sessions#destroy', as: 'signout'
 
 
   resources :cards
+
+  resources :users
 
 end
