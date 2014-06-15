@@ -7,3 +7,12 @@
   <%= password_field_tag :password %>
   <%= submit_tag %>
 <% end %>
+
+<div>
+    <h4>Alert:
+    <%= flash.now[:alert] %>
+    </h4>
+    <h4>Notice:
+    <%= flash.now[:notice] %>
+    </h4>
+</div>
