@@ -16,11 +16,12 @@ class SessionsController < ApplicationController
         #     :secret => omniauth_hash["extra"]["access_token"].secret,
         #     :uid    => omniauth_hash["uid"]
         #   )
-         
+        
         
         @user[:image_url] = omniauth_hash["info"]["image"]
-        @user.save!
 
+        @user.save!
+binding.pry
         session[:user_id] = @user.id 
         redirect_to profile_path
         
