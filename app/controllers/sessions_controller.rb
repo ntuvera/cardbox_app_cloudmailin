@@ -9,9 +9,8 @@ class SessionsController < ApplicationController
 
     if token      
       @user = User.from_omniauth(env["omniauth.auth"])
-      session[:user_id] = @user.id
-      #self.current_user = @user
-      redirect_to profile_path  # login page
+      session[:user_id] = @user.id     
+      redirect_to profile_path
     else   
 
       @user = login(params[:email], params[:password])       
@@ -29,11 +28,5 @@ class SessionsController < ApplicationController
     logout
     redirect_to root_path
   end 
-
-  protected
-
-  # def auth_hash
-  #   request.env['omniauth.auth']
-  # end
 
 end

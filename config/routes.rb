@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   post '/users'   => 'users#create', as: 'users'
   get '/profile'  => 'users#profile', as: 'profile'
 
-  get '/login'      => 'sessions#new', as: 'login'  #can refer to as login_path
+  get '/login'      => 'sessions#new', as: 'login'  # can refer to as login_path
   post '/sessions'  => 'sessions#create', as: 'session'
-  delete '/logout'  => 'sessions#destroy', as: 'logout'  #can refer to as logout_path
+  delete '/logout'  => 'sessions#destroy', as: 'logout'  # can refer to as logout_path
 
   # in case a user profile is being deleted without destroy the corresponding session:
   get 'log_out' => 'sessions#destroy'
