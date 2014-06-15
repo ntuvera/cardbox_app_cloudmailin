@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
 
   resources :cards
-
+  resources :contacts
   resources :users
 
 end

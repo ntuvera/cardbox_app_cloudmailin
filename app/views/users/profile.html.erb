@@ -15,12 +15,14 @@
     <img class="business-card" src="<%= card.email.attachment_url %>">
     <p><%= card.email.message %></p>
     <div class="contact info">
-      <form method="post"> <!-- post to Contacts to add data into Contact Objects -->
+      <form action="/contacts" method="post"> <!-- post to Contacts to add data into Contact Objects -->
+        <%= token_tag %>
         <input type="text" name="name" value="<%= card.email.subject %>">
         <input type="text" name="email" placeholder="JSmith@gmail.com">
         <input type="phone" name="phone" placeholder="(555) 555-5555">
         <input type="text" name="linkedIn" placeholder="LinkedIn ID">
         <textarea name="memo" cols="20" rows="1"><%= card.email.message %></textarea>
+        <input type="url" name="card_image_url" value="<%= card.email.attachment_url %>">
         <input type="submit" value="Create Contact">
         <!-- add more for fields for if including more data on contact -->
       </form>
