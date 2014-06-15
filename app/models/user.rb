@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
       # user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       #binding.pry
       user.email = auth.info.email
-      # user.crypted_password = ENV["crypted_password"]
-      # user.salt = ENV["salt"]
+      user.crypted_password = ENV["crypted_password"]
+      user.salt = ENV["salt"]
       user.save!
     end
   end
