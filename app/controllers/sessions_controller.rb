@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
         @user[:image_url] = omniauth_hash["info"]["image"]
 
         @user.save!
-binding.pry
+
         session[:user_id] = @user.id 
         redirect_to profile_path
         
