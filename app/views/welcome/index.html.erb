@@ -1,21 +1,16 @@
-<p>views/welcome/index.html.erb</p>
+<h1>welcome->index.html.erb</h1>
 
 
 <div class="welcome start">
-  <div>
-    <a href="/signup">Sign up</a>
-     <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %>
-  </div>
 
-  <div>
-    <h2>Log-In to cardbox_app</h2>
-
-    <%= form_tag session_path do %>
-      <%= text_field_tag :email %>
-      <%= password_field_tag :password %>
-      <%= submit_tag %>
+    <% if current_user %>
+        <p>Logged in as <%= current_user.email %></p>
+        <%= link_to "LogOut", logout_path, method: :delete %>
+    <% else %>
+        <%= link_to 'SignUp', signup_path %>
+        <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %>
+        <%= link_to 'LogIn', login_path %>
     <% end %>
 
-  </div>
-
-</div>
+<div>
+ 
