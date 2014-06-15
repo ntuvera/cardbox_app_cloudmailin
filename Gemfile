@@ -40,11 +40,12 @@ gem 'debugger', group: [:development, :test]
 
 gem 'rails_12factor', group: :production
 
-
 gem 'rest-client', '~> 1.6.7'
 
-
-gem 'carrierwave' # just delete if not needed
-
 gem 'sorcery'
+
+gem 'omniauth'
+gem 'omniauth-linkedin'
+
+gem 'pry'
 

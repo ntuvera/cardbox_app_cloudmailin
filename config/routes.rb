@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   post '/sessions'  => 'sessions#create', as: 'session'
   delete '/logout'  => 'sessions#destroy', as: 'logout'  #can refer to as logout_path
 
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  delete 'signout', to: 'sessions#destroy', as: 'signout'
+
+
   resources :cards
 
 end
