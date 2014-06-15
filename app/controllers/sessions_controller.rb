@@ -11,14 +11,14 @@ class SessionsController < ApplicationController
       @user = User.from_omniauth(env["omniauth.auth"])
       session[:user_id] = @user.id     
       redirect_to profile_path
-    else   
-
+    else
       @user = login(params[:email], params[:password])       
       if @user
         session[:user_id] = @user.id
         redirect_to profile_path
       else
-        render :new  #login failed
+        #render :new  #login failed  
+        redirect_to login_path, alert: 'Log-In Failed'     
       end
     end
 
@@ -26,7 +26,8 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_path
+    # redirect_to root_path
+    redirect_to login_path, notice: "Logged-Out"
   end 
 
 end
