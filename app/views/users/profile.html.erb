@@ -1,4 +1,5 @@
 <h1>Profile page</h1>
+
 <div class="profile header">
   <%= current_user.email %> is logged in.
   <form action="/logout" method='post'>
@@ -6,6 +7,10 @@
     <input type="hidden" name="_method" value="delete">
     <button class="btn btn-primary" type='submit'>Log Out</button>
   </form>
+</div>
+<hr>
+<div class="img" id="me">
+  <img src="<%= current_user.image_url%>" alt="Profile Picture" />
 </div>
 
 <div class="cards container">
