@@ -12,6 +12,5 @@ consumer = OAuth::Consumer.new(api_key, api_secret, configuration)
 access_token = OAuth::AccessToken.new(consumer, user_token, user_secret)
 response = access_token.get("http://api.linkedin.com/v1/people/~")
 
-binding.pry
 
 # response = access_token.get("http://api.linkedin.com/v1/people/~?format=json")
