@@ -9,7 +9,7 @@
 </div> -->
 
 
-<button class='show_contacts' onclick="clearAndDisplayContactsList()">Show Contacts</button>
+<button class='show-contacts'>Show Contacts</button>
 
 <div class="contacts-container">
 </div>
@@ -19,7 +19,7 @@
   <% current_user.cards.each do |card| %>
   <div class="saved card">
     <%= image_tag(card.email.attachment_url, class: 'business-card') %>
-    <p><%= card.email.message %></p>
+    <p>" <%= card.email.message %> "</p>
     <div class="contact info">
       <%= form_for :contact, :url => '/contacts' do |f|%>
 

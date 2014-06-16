@@ -1,13 +1,29 @@
 console.log('Stop Peeking...')
 
+function Card(cardJSON){
+  this.name               = cardJSON.name;
+  this.email              = cardJSON.email;
+  this.linkedin_id        = cardJSON.linkedin_id;
+  this.phone              = cardJSON.phone;
+  this.location           = cardJSON.location; // do we really need this?
+  this.network            = cardJSON.network;
+  this.card_image_url     = cardJSON.card_image_url;
+  this.card_received_date = cardJSON.card_received_date;
+  this.id                 = cardJSON.id;
+}
+
+// Contacts Show Button //
+
 function Contact(contactJSON){
-  this.sender         = contactJSON.sender;
-  this.subject        = contactJSON.subject;
-  this.message        = contactJSON.message;
-  this.created_at     = contactJSON.created_at;
-  this.updated_at     = contactJSON.updated_at; // do we really need this?
-  this.attachment_url = contactJSON.attachment_url;
-  this.id             = contactJSON.id;
+  this.name               = contactJSON.name;
+  this.email              = contactJSON.email;
+  this.linkedin_id        = contactJSON.linkedin_id;
+  this.phone              = contactJSON.phone;
+  this.location           = contactJSON.location; // do we really need this?
+  this.network            = contactJSON.network;
+  this.card_image_url     = contactJSON.card_image_url;
+  this.card_received_date = contactJSON.card_received_date;
+  this.id                 = contactJSON.id;
 }
 
 function ContactView(model){
@@ -16,8 +32,8 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
-  var newContactEl = $('<div>').attr('class', 'contact').html('test'); // will finish in a second
-  this.el = newContactEl;
+  var newElement = $('<div>').attr('class', 'contact').html(this.model.name); // will finish in a second
+  this.el = newElement;
   return this;
 }
 
@@ -73,17 +89,19 @@ function clearAndDisplayContactsList(){
 
 var contactsCollection = new ContactsCollection();
 
-$('.show_contacts').on('click', function(e){
-  clearAndDisplayContactsList();
-})
 
 $(function(){
 
-  contactsCollection.fetch();
-
-  $(contactsCollection).on('addFlare', function(){
+  $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
+    alert('omgwtfbbq contacts!')
   })
+
+  // contactsCollection.fetch();
+
+  // $(contactsCollection).on('addFlare', function(){
+  //   clearAndDisplayContactsList();
+  // })
 
 
 })
