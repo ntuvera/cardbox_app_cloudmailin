@@ -46,6 +46,10 @@ gem 'sorcery'
 
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem 'linkedin'
 
 gem 'pry'
+
+
+
 

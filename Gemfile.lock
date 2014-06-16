@@ -62,6 +62,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
+    linkedin (0.4.7)
+      hashie (~> 2.0)
+      multi_json (~> 1.0)
+      oauth (~> 0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -167,6 +171,7 @@ DEPENDENCIES
   debugger
   jbuilder (~> 2.0)
   jquery-rails
+  linkedin
   omniauth
   omniauth-linkedin
   pg
