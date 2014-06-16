@@ -1,10 +1,12 @@
 class ContactsController < ApplicationController
 
  def index
+    # @user     = User.find(params[:id])
     @contacts = Contact.all
   end
 
   def show
+    @contacts = Contact.all
     @contact = Contact.find(params[:id])
   end
 
@@ -14,7 +16,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.create(contact_params)
+    @contact = Contact.create(contact_params) # need to associate new contacts with user here
     redirect_to contacts_path
   end
 
@@ -35,7 +37,7 @@ class ContactsController < ApplicationController
 private
 
   def contact_params
-    params.require(:contact).permit(:name, :email, :linkedin_id, :phone, :location, :note, :network, :card_image_url, :card_received_date)
+    params.require(:contact).permit(:name, :email, :linkedin_id, :phone, :location, :note, :network, :card_image_url, :card_received_date, :user_id)
   end
 
 end
