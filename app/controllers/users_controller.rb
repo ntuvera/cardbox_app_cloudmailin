@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @authorize_url = linkedin_client.request_token.authorize_url
+    # @authorize_url = linkedin_client.request_token.authorize_url
   end
 
   def edit
