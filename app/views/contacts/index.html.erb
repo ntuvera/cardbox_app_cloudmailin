@@ -2,9 +2,9 @@
 
 
 <% current_user.contacts.each do |contact| %> <!-- no relation, join table or add user_id to table? -->
-    <div class="friend">
+    <div class="contact">
         <div class="front">
-            <a href="/"><img src="<%= contact.card_image_url %>" alt="Avatar"></a>
+            <a href="/"><img class='business-card' src="<%= contact.card_image_url %>" alt="Avatar"></a>
         </div>
         <div class="back">
             <span class="contact-name"><%= contact.name %></span><br>

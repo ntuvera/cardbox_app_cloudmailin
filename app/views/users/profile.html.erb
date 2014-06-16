@@ -9,6 +9,10 @@
 </div> -->
 
 
+<button class='show_contacts' onclick="clearAndDisplayContactsList()">Show Contacts</button>
+
+<div class="contacts-container">
+</div>
 
 <div class="cards container">
 
@@ -30,7 +34,7 @@
         <%= f.label :location %>
         <%= f.text_field :location %><br>
         <%= f.label :note %>
-        <%= f.text_area :note %><br>
+        <%= f.text_area :note, :value => card.email.message %><br>
         <%= f.label :network %>
         <%= f.text_field :network %><br>
         <%= f.label :card_image_url %>
