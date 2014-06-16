@@ -32,7 +32,7 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
-  var newElement = $('<div>').attr('class', 'contact').html(this.model.name); // will finish in a second
+  var newElement = $('<div>').html('test div'); // will finish in a second
   this.el = newElement;
   return this;
 }
@@ -92,10 +92,26 @@ var contactsCollection = new ContactsCollection();
 
 $(function(){
 
+  // contactsCollection.fetch();
+
+  // If you see the 'addFlare' shot in the sky!!!!
+  $(contactsCollection).on('addFlare', function(){
+    clearAndDisplayContactsList();
+  });
+
+
   $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
-    alert('omgwtfbbq contacts!')
+    contactsCollection.fetch();
+    // alert('omgwtfbbq contacts!')
   })
+
+})
+
+  // $('.show-contacts').on('click', function(){
+  //   clearAndDisplayContactsList();
+  //   // alert('omgwtfbbq contacts!')
+  // })
 
   // contactsCollection.fetch();
 
@@ -104,4 +120,4 @@ $(function(){
   // })
 
 
-})
+
