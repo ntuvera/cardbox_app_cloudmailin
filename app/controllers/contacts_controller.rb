@@ -3,6 +3,10 @@ class ContactsController < ApplicationController
  def index
     # @user     = User.find(params[:id])
     @contacts = Contact.all
+    # respond_to do |format|
+    #   format.json { render :json => @contacts.to_json }
+    #   format.html
+    # end
   end
 
   def show
