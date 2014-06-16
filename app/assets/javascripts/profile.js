@@ -94,43 +94,18 @@ var contactsCollection = new ContactsCollection();
 
 $(function(){
 
-<<<<<<< HEAD
-  // contactsCollection.fetch();
-
-  // If you see the 'addFlare' shot in the sky!!!!
-  $(contactsCollection).on('addFlare', function(){
-    clearAndDisplayContactsList();
-  });
-=======
->>>>>>> aaa7c71642e435839bbc73d54841cb89ca47d96b
-
-
   $('.show-contacts').on('click', function(){
     contactsCollection.fetch();
     clearAndDisplayContactsList();
-<<<<<<< HEAD
-    contactsCollection.fetch();
-    // alert('omgwtfbbq contacts!')
-  })
 
-})
-
-  // $('.show-contacts').on('click', function(){
-  //   clearAndDisplayContactsList();
-  //   // alert('omgwtfbbq contacts!')
-  // })
-
-  // contactsCollection.fetch();
-=======
     $('.contacts-container').load('/contacts').hide().fadeIn('slow');
   })
-
->>>>>>> aaa7c71642e435839bbc73d54841cb89ca47d96b
 
 
   $(contactsCollection).on('addFlare', function(){
     clearAndDisplayContactsList();
   })
+})
 
 
 
