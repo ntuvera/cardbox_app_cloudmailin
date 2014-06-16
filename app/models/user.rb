@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
   has_many :cards
+  has_many :contacts
 
   #validates_presence_of :password, on: :create
   validates_presence_of :email, on: :create

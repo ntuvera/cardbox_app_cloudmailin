@@ -27,9 +27,9 @@ body {
 }
 
 
-// Friend
+// Contact
 // ----------------------------------------
-section#friends {
+section#contact {
   font-size: 0;
 }
 
@@ -37,7 +37,7 @@ img {
   width: 100%;
 }
 
-div.friend {
+div.contact {
   display: inline-block;
   font-size: 12px;
   position: relative;
@@ -96,7 +96,7 @@ div.friend {
     z-index: 800;
   }
 
-  span.friend-name {
+  span.contact-name {
     font-size: 16px;
   }
 }
@@ -105,7 +105,7 @@ div.actions {
   margin: 12px 0 0 0;
 
   a {
-    @extend a.new-friend;
+    @extend a.new-contact;
     color: $color-5;
   }
 }

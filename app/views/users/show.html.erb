@@ -1,0 +1,20 @@
+<h1>show.html.erb</h1>
+
+<p>is this where I display conacts?</p>
+
+<% current_user.contacts.each do |contact| %>
+    <div class="friend">
+        <div class="front">
+            <a href="/"><img src="<%= contact.card_image_url %>" alt="Avatar"></a>
+        </div>
+        <div class="back">
+            <span class="contact-name"><%= contact.name %></span><br>
+            <span class="contact-email"><%= contact.email %></span><br>
+            <span class="contact-phone"><%= contact.phone %></span><br>
+            <span class="contact-linkedinid"><%= contact.linkedin_id %></span><br>
+            <div class="actions">
+                <link_to "Show" />
+            </div>
+        </div>
+    </div>
+<% end %>
