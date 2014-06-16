@@ -52,6 +52,6 @@ gem 'pry'
 gem 'pry-nav'
 
 gem 'nokogiri'
-
+gem 'mechanize'
 
 
