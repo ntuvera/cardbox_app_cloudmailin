@@ -1,10 +1,12 @@
 class ContactsController < ApplicationController
 
  def index
+    binding.pry # @user     = User.find(params[:id])
     @contacts = Contact.all
   end
 
   def show
+    @contacts = Contact.all
     @contact = Contact.find(params[:id])
   end
 
