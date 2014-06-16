@@ -4,8 +4,8 @@ require 'oauth'
 
 api_key = '77xt9cu7mk8m9m'
 api_secret = 'WTP5zA3MTBn9hQXO'
-user_token = '02a71aaa-33bb-4920-9297-bbbe586fc2ec'
-user_secret = 'a46d71f8-7534-415e-b8d6-cc03b8d01ded'
+user_token = '11ba833c-65c9-4b14-9094-cf5410081c39'
+user_secret = 'd1f61979-efda-4bd1-8758-8e91c6985072'
 
 configuration = { :site => 'https://api.linkedin.com' }
 consumer = OAuth::Consumer.new(api_key, api_secret, configuration)
