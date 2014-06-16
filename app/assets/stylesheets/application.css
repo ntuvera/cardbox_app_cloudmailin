@@ -34,11 +34,14 @@
 .cards.container{
   display:inline-block;
   background-color: #F0FFFF;
-
 }
 
+.show_contacts{
+  margin: 20px;
+}
 .contact{
   margin: 10px;
+  border: 1px black solid;
 }
 .saved.card{
   display:inline-block;
