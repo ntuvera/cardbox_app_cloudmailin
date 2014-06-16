@@ -1,17 +1,17 @@
-require 'pry'
+# require 'pry'
 
-require 'oauth'
+# require 'oauth'
 
-api_key = '77ryvgv640zxdw'
-api_secret = 'tb0Sl4JEmTfG93vS'
-user_token = '32a6f012-1243-49ba-95e7-d9386a1f1393'
-user_secret = '64116f58-7d35-4291-af06-ce2ec6892cae'
+# api_key = '77xt9cu7mk8m9m'
+# api_secret = 'WTP5zA3MTBn9hQXO'
+# user_token = '02a71aaa-33bb-4920-9297-bbbe586fc2ec'
+# user_secret = 'a46d71f8-7534-415e-b8d6-cc03b8d01ded'
 
-configuration = { :site => 'https://api.linkedin.com' }
-consumer = OAuth::Consumer.new(api_key, api_secret, configuration)
-access_token = OAuth::AccessToken.new(consumer, user_token, user_secret)
-response = access_token.get("http://api.linkedin.com/v1/people/~")
+# configuration = { :site => 'https://api.linkedin.com' }
+# consumer = OAuth::Consumer.new(api_key, api_secret, configuration)
+# access_token = OAuth::AccessToken.new(consumer, user_token, user_secret)
+# response = access_token.get("http://api.linkedin.com/v1/people/~")
 
-binding.pry
+# binding.pry
 
-# response = access_token.get("http://api.linkedin.com/v1/people/~?format=json")
+# # response = access_token.get("http://api.linkedin.com/v1/people/~?format=json")
