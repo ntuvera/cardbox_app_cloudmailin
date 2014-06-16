@@ -32,7 +32,7 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
-  var newElement = $('<div>').attr('class', 'contact').html(this.model.name); // will finish in a second
+  var newElement = $('<div>').attr('class', 'contact-card');
   this.el = newElement;
   return this;
 }
@@ -84,24 +84,28 @@ function clearAndDisplayContactsList(){
     var contactView = new ContactView(contact);
     $('.contacts-container').append(contactView.render().el);
   }
+
 }
 // show contacts button method?
 
-var contactsCollection = new ContactsCollection();
 
+var contactsCollection = new ContactsCollection();
 
 $(function(){
 
+
+
   $('.show-contacts').on('click', function(){
+    contactsCollection.fetch();
     clearAndDisplayContactsList();
-    alert('omgwtfbbq contacts!')
+    $('.contacts-container').load('/contacts').hide().fadeIn('slow');
   })
 
-  // contactsCollection.fetch();
 
-  // $(contactsCollection).on('addFlare', function(){
-  //   clearAndDisplayContactsList();
-  // })
+
+  $(contactsCollection).on('addFlare', function(){
+    clearAndDisplayContactsList();
+  })
 
 
 })
