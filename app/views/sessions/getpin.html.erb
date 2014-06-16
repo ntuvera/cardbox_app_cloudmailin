@@ -1,0 +1,9 @@
+<h1>sessions->getpin.html.erb/<h1>
+
+<div class="linkedin_pin">
+      <form action="/sessions/authorize" method="post"> 
+        <%= token_tag %>
+        <input type="text" name="pin" placeholder="enter the PIN here">        
+        <input type="submit" value="Submit PIN">        
+      </form>
+</div>

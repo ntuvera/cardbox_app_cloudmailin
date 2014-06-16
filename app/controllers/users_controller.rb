@@ -41,6 +41,50 @@ class UsersController < ApplicationController
     redirect_to login_path
   end
 
+
+  def authorize_linkedin
+
+
+consumer_key = current_user.consumer_key
+consumer_secret = current_user.consumer_secret
+client = LinkedIn::Client.new(consumer_key, consumer_secret)
+
+# If you want to use one of the scopes from linkedin you have to pass it in at this point
+# You can learn more about it here: http://developer.linkedin.com/documents/authentication
+request_token = client.request_token({}, :scope => "r_network")
+
+rtoken = request_token.token
+rsecret = request_token.secret
+ 
+# to test from your desktop, open the following url in your browser
+# and record the pin it gives you
+#request_token.authorize_url
+# => "https://api.linkedin.com/uas/oauth/authorize?oauth_token=<generated_token>"
+
+
+puts client.request_token.authorize_url
+puts "Access this URL get the PIN and paste it here:"
+pin = gets.strip
+
+# then fetch your access keys
+puts client.authorize_from_request(rtoken, rsecret, pin)
+# => ["ee295a7d-9cb5-4f28-8e09-22d02f802619", "a4755da0-411a-4a61-89cc-56c510fc36eb"] # <= save these for future requests
+# accesskey1 = client.authorize_from_request(rtoken, rsecret, 94804)[0]
+# accesskey2 = client.authorize_from_request(rtoken, rsecret, 94804)[1]
+# or authorize from previously fetched access keys
+#client.authorize_from_access("ee295a7d-9cb5-4f28-8e09-22d02f802619", "a4755da0-411a-4a61-89cc-56c510fc36eb")
+
+
+    # you're now free to move about the cabin, call any API method
+    
+    binding.pry
+
+client.connections
+
+  end
+
+
+
 private
 
   def user_params
