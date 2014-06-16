@@ -8,11 +8,45 @@
   </form>
 </div> -->
 
+<hr>
+
+
+<!-- if the current_user has supplied a pin, then hide a field
+    otherwise, render a field and prompt to input the key.  save the pin to 
+    the database.  -->
+
+<% unless current_user.pin %>
+  <h1>STEP 1: GET PIN</h1>
+  <div class="linkedin_pin">
+        <%= link_to "get pin", @authorize_url, target: '_blank' %>
+        <form action="/authorize" method="get"> 
+          <%= token_tag %>                
+          <input type="submit" value="get more info from linkedin">        
+        </form>
+        <%= @url %> 
+  </div>
+  <h1>STEP 2: SET PIN</h1>
+  <div>
+      <%= form_for current_user, remote: true do |f| %>
+        <%= f.text_field :pin %>
+        <%= f.submit "set pin" %>
+      <% end %>
+  </div>
+<% end %>
+<hr>
+
+
+<div class="img" id="me">
+  <img src="<%= current_user.image_url%>" alt="Profile Picture" />
+
+</div>
+
 
 <button class='show-contacts'>Show Contacts</button>
 
 <div class="contacts-container">
 </div>
+
 
 <div class="cards container">
 

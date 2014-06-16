@@ -22,8 +22,11 @@ Rails.application.routes.draw do
   # in case a user profile is being deleted without destroy the corresponding session:
   get 'log_out' => 'sessions#destroy'
 
-  get 'auth/:provider/callback', to: 'sessions#create'
+  #get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/linkedin/callback', to: 'sessions#create_linkedin'
   get 'auth/failure', to: redirect('/')
+  get '/authorize', to: 'users#authorize_linkedin' # FOR THE 2ND AUTHORISATION TO GET MORE PERMISSIONS ...(NOT NEEDED ?)
+
   delete 'signout', to: 'sessions#destroy', as: 'signout'
 
 

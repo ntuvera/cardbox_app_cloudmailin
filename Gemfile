@@ -49,7 +49,9 @@ gem 'omniauth-linkedin'
 gem 'linkedin'
 
 gem 'pry'
+gem 'pry-nav'
 
+gem 'nokogiri'
 
 
 
