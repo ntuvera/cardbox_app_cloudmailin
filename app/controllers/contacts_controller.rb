@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
 
+
  def index
     # @user     = User.find(params[:id])
     @contacts = Contact.all
@@ -21,6 +22,9 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.create(contact_params) # need to associate new contacts with user here
+
+    # if @contact(name: params[:name])           # need error render if contact already exists with same name
+
     redirect_to contacts_path
   end
 
