@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   #get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/linkedin/callback', to: 'sessions#create_linkedin'
   get 'auth/failure', to: redirect('/')
-  post '/authorize', to: 'users#authorize_linkedin'
+  get '/authorize', to: 'users#authorize_linkedin' # FOR THE 2ND AUTHORISATION TO GET MORE PERMISSIONS ...(NOT NEEDED ?)
 
   delete 'signout', to: 'sessions#destroy', as: 'signout'
 
