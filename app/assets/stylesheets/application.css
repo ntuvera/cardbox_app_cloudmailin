@@ -58,7 +58,7 @@ body {
   height: 100px;
   width: 100px;
 }
-.cards.container{
+#cards-container{
   display:inline-block;
   background-color: #F0FFFF;
 }
@@ -67,10 +67,12 @@ body {
   margin: 20px;
 }
 .contact{
+  height: 200px;
+  width: 350px;
   margin: 10px;
-  border: 1px black solid;
+/*  border: 1px black solid;*/
 }
-.saved.card{
+.saved-card{
   display:inline-block;
   margin: 20px;
   border: black 1px solid;

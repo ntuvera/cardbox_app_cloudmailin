@@ -1,5 +1,6 @@
 console.log('Stop Peeking...!')
 
+// Cards Show Button //
 function Card(cardJSON){
   this.name               = cardJSON.name;
   this.email              = cardJSON.email;
@@ -10,6 +11,65 @@ function Card(cardJSON){
   this.card_image_url     = cardJSON.card_image_url;
   this.card_received_date = cardJSON.card_received_date;
   this.id                 = cardJSON.id;
+}
+
+function CardView(model){
+  this.model    = model;
+  this.el       = undefined;
+}
+
+CardView.prototype.render = function(){
+  var newCardEl = $('<div>').html('card append test');
+  this.el       = newCardEl;
+  return this;
+}
+
+function CardsCollection(){
+  this.models = {};
+}
+
+CardsCollection.prototype.add = function(cardJSON){
+  var newCard = new Card(cardJSON);
+  this.models[cardJSON.id] = newCard;
+  $(this).trigger('addCardFlare');
+  return this;
+}
+
+CardsCollection.prototype.create = function(paramObject){
+  var that = this;
+  $.ajax({
+    url: '/emails',
+    method: 'post',
+    dataType: 'json',
+    data: {card: paramObject},
+    success: function(data){
+      that.add(data);
+    }
+  })
+}
+
+CardsCollection.prototype.fetch = function(){
+  var that = this;
+  $.ajax({
+    url: '/emails',
+    dataType: 'json',
+    success: function(data){
+      for (idx in data){
+        that.add(data[idx]);
+      }
+    }
+  })
+}
+
+function clearAndDisplayCardsList(){
+
+  $('.cards-container').html('');
+
+  for(idx in cardsCollection.models){
+    var card      = cardsCollection.models[idx];
+    var cardView  = new CardView(card);
+    $('.cards-container').append(cardView.render().el);
+  }
 }
 
 // Contacts Show Button //
@@ -32,13 +92,52 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
-  var newElement = $('<div>').attr('class', 'contact-card');
-  this.el = newElement;
+  var  $card      = $('<div>').attr('class','contact');
+  var  $front     = $('<div>').attr('class', 'front');
+  var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
+  var  $back      = $('<div>').attr('class', 'back');
+  var  $name      = $('<h5>').attr('class','contact-name').html(this.model.name);
+  var  $email     = $('<p>').attr('class','contact-email').html(this.model.email);
+  var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
+  var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
+  var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
+  ($card).append(($front).append($aimage)).append(($back)
+    .append($name).append($email).append($phone).append($linkedinid).append($location))
+
+  this.el = $card;
   return this;
 }
 
 function ContactsCollection(){
   this.models = {};
+}
+
+
+
+ContactsCollection.prototype.create = function(paramObject){
+  var that = this;
+  $.ajax({
+    url: '/contacts',
+    method: 'post',
+    dataType: 'json',
+    data: {contact: paramObject},
+    success: function(data){
+      var contact = new Contact(data);
+      that.models[contact.id] = contact;
+    }
+  })
+}
+
+ContactsCollection.prototype.delete = function(){
+  var that = this;
+  $.ajax({
+    url: '/contacts',
+    method: 'post',
+    dataType: 'json',
+    data: {_method: 'delete'},
+    success: function(){
+    }
+  })
 }
 
 ContactsCollection.prototype.add = function(contactJSON){
@@ -48,18 +147,6 @@ ContactsCollection.prototype.add = function(contactJSON){
   return this;
 }
 
-ContactsCollection.prototype.create = function (paramObject){
-  var that = this;
-  $.ajax({
-    url: '/contacts',
-    method: 'post',
-    dataType: 'json',
-    data: {contact: paramObject},
-    success: function(data){
-      that.add(data);
-    }
-  })
-}
 
 ContactsCollection.prototype.fetch = function(){
   var that = this;
@@ -72,19 +159,17 @@ ContactsCollection.prototype.fetch = function(){
       }
     }
   })
-}
+};
+
 //incorporate delete ajax call with animate shrink for cards & contacts?
 
 function clearAndDisplayContactsList(){
-
-  $('.contacts-container').html('');
-
+  $('#contacts-container').html('').fadeOut('slow');
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    $('.contacts-container').append(contactView.render().el);
+    $('#contacts-container').append(contactView.render().el).hide().show('slow')
   }
-
 }
 
 function showContactsOnMap() {
@@ -159,23 +244,30 @@ function showContactsOnMap() {
 
 // show contacts button method?
 
-
 var contactsCollection = new ContactsCollection();
+var cardsCollection    = new CardsCollection();
 
 $(function(){
 
 
-  $('.show_contacts').on('click', function(){
-    contactsCollection.fetch();
-    clearAndDisplayContactsList();
-    $('.contacts-container').load('/contacts').hide().fadeIn('slow');
-  })
+  contactsCollection.fetch();
 
-
-  $(contactsCollection).on('addFlare', function(){
+  $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
   })
 
+  $('.hide-contacts').on('click', function(){
+    $('#contacts-container').fadeOut('fast');
+  })
+
+  $('.show-cards').on('click', function(){
+    $('#cards-container').load('/cards').hide().fadeIn('slow');
+  });
+
+  $('.hide-cards').on('click', function(){
+    $('#cards-container').fadeOut('fast');
+
+  })
 
   $('.show-contacts-on-map').on('click', function(){
     contactsCollection.fetch();
@@ -183,3 +275,4 @@ $(function(){
   })
 
 })
+

@@ -61,12 +61,12 @@ client = linkedin_client
 
 # If you want to use one of the scopes from linkedin you have to pass it in at this point
 # You can learn more about it here: http://developer.linkedin.com/documents/authentication
-binding.pry
+#binding.pry
 request_token = client.request_token({}, :scope => "r_network")
 
 rtoken = request_token.token
 rsecret = request_token.secret
- 
+
 # to test from your desktop, open the following url in your browser
 # and record the pin it gives you
 #request_token.authorize_url
@@ -91,8 +91,8 @@ redirect_to client.request_token.authorize_url
 
 
 # you're now free to move about the cabin, call any API method
-  
-    
+
+
 # client.connections
 # binding.pry
 
@@ -103,13 +103,13 @@ redirect_to client.request_token.authorize_url
 private
   def linkedin_client
     consumer_key = current_user.consumer_key
-    consumer_secret = current_user.consumer_secret  
+    consumer_secret = current_user.consumer_secret
     LinkedIn::Client.new(consumer_key, consumer_secret)
   end
 
 
   def user_params
-    params.require(:user).permit(:email, :password, :pin)
+    params.require(:user).permit(:email, :password, :avatar_url, :pin)
   end
 
 end
