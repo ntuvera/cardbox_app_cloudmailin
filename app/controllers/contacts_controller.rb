@@ -8,6 +8,7 @@ class ContactsController < ApplicationController
       format.json { render :json => @contacts.to_json }
       format.html
     end
+    binding.pry
   end
 
   def show
