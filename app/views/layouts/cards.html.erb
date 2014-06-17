@@ -1,48 +1,15 @@
-
-<!-- if the current_user has supplied a pin, then hide a field
-    otherwise, render a field and prompt to input the key.  save the pin to
-    the database.  -->
-
-<% unless current_user.pin %>
-  <h1>STEP 1: GET PIN</h1>
-  <div class="linkedin_pin">
-        <%= link_to "get pin", @authorize_url, target: '_blank' %>
-<!--         <form action="/authorize" method="get">
-          <%= token_tag %>
-          <input type="submit" value="get more info from linkedin">
-        </form> -->
-        <%= @url %>
-  </div>
-  <h1>STEP 2: SET PIN</h1>
-  <div>
-      <%= form_for current_user, remote: true do |f| %>
-        <%= f.text_field :pin %>
-        <%= f.submit "set pin" %>
-      <% end %>
-  </div>
-<% end %>
-<hr>
+<script>
+function validateUsername() {
+    var x = document.forms["name"].value;
+    if (x==null || x=="") {
+        alert("First name must be filled out");
+        return false;
+    }
+}
+</script>
 
 
-
-<div class="img" id="me">
-  
-
-</div>
-
-
-=======
-<button class="show-cards">Show Saved Cards</button>
-<button class="hide-cards">Hide Saved Cards</button>
-<button class='show-contacts'>Show Contacts</button>
-<button class='hide-contacts'>Hide Contacts</button>
-
-<div id="contacts-container">
-</div>
-
-
-<div id="cards-container">
-<!--   <% current_user.cards.each do |card| %>
+  <% current_user.cards.each do |card| %>
   <div class="saved-card">
     <div class="card-image">
         <%= image_tag(card.email.attachment_url, class: 'business-card') %>
@@ -72,13 +39,10 @@
         <%= f.label :user_id %>
         <%= f.text_field :user_id, :value => current_user.id %>
         <%= f.submit %>
-        
+
       <% end %>
 
     </div>
   </div>
-  
 
-  <% end %> -->
-</div>
-
+<% end %>

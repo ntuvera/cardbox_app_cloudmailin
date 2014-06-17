@@ -3,16 +3,15 @@ class ContactsController < ApplicationController
 
  def index
     # @user     = User.find(params[:id])
-    @contacts = Contact.all
+    @contacts = current_user.contacts
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
-      format.html
+      # format.html
     end
     binding.pry
   end
 
   def show
-    @contacts = Contact.all
     @contact = Contact.find(params[:id])
   end
 
@@ -22,11 +21,11 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.create(contact_params) # need to associate new contacts with user here
-    # respond_to do |format|
-    #   format.json { render :json => contact.to_json }
-    #   format.html
-    # end
+    @contact = Contact.create(contact_params)
+    respond_to do |format|
+      format.json { render :json => @contacts.to_json }
+      format.html
+    end
     # if @contact(name: params[:name])           # need error render if contact already exists with same name
 
     redirect_to contacts_path

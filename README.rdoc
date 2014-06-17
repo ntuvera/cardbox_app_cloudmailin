@@ -1,28 +1,13 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#Name of App
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+What do you do with your stacks of business cards after an networking event?  Which card belongs to who?  Keep track of your new found contacts quickly and conveniently with "app name here".
+
+APIs and Authentication
+* LinkedIn
+* CloudMailin
+* Google Maps
+
+
+Andrea focused on the back end and authentication.  Paul focused on the API tie-ins and coordinated tasks.  Nate focused on the front-end and Javascript

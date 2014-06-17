@@ -2,6 +2,10 @@ class EmailsController < ApplicationController
 
   def index
     @emails = Email.all
+    respond_to do |format|
+      format.json { render :json => @emails.to_json }
+      format.html
+    end
   end
 
   def show
