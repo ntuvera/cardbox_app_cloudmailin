@@ -1,76 +1,76 @@
 console.log('Stop Peeking...')
 
-// // Cards Show Button //
-// function Card(cardJSON){
-//   this.name               = cardJSON.name;
-//   this.email              = cardJSON.email;
-//   this.linkedin_id        = cardJSON.linkedin_id;
-//   this.phone              = cardJSON.phone;
-//   this.location           = cardJSON.location; // do we really need this?
-//   this.network            = cardJSON.network;
-//   this.card_image_url     = cardJSON.card_image_url;
-//   this.card_received_date = cardJSON.card_received_date;
-//   this.id                 = cardJSON.id;
-// }
+// Cards Show Button //
+function Card(cardJSON){
+  this.name               = cardJSON.name;
+  this.email              = cardJSON.email;
+  this.linkedin_id        = cardJSON.linkedin_id;
+  this.phone              = cardJSON.phone;
+  this.location           = cardJSON.location; // do we really need this?
+  this.network            = cardJSON.network;
+  this.card_image_url     = cardJSON.card_image_url;
+  this.card_received_date = cardJSON.card_received_date;
+  this.id                 = cardJSON.id;
+}
 
-// function CardView(model){
-//   this.model    = model;
-//   this.el       = undefined;
-// }
+function CardView(model){
+  this.model    = model;
+  this.el       = undefined;
+}
 
-// CardView.prototype.render = function(){
-//   var newCardEl = $('<div>').html('card append test');
-//   this.el       = newCardEl;
-//   return this;
-// }
+CardView.prototype.render = function(){
+  var newCardEl = $('<div>').html('card append test');
+  this.el       = newCardEl;
+  return this;
+}
 
-// function CardsCollection(){
-//   this.models = {};
-// }
+function CardsCollection(){
+  this.models = {};
+}
 
-// CardsCollection.prototype.add = function(cardJSON){
-//   var newCard = new Card(cardJSON);
-//   this.models[cardJSON.id] = newCard;
-//   $(this).trigger('addCardFlare');
-//   return this;
-// }
+CardsCollection.prototype.add = function(cardJSON){
+  var newCard = new Card(cardJSON);
+  this.models[cardJSON.id] = newCard;
+  $(this).trigger('addCardFlare');
+  return this;
+}
 
-// CardsCollection.prototype.create = function(paramObject){
-//   var that = this;
-//   $.ajax({
-//     url: '/emails',
-//     method: 'post',
-//     dataType: 'json',
-//     data: {card: paramObject},
-//     success: function(data){
-//       that.add(data);
-//     }
-//   })
-// }
+CardsCollection.prototype.create = function(paramObject){
+  var that = this;
+  $.ajax({
+    url: '/emails',
+    method: 'post',
+    dataType: 'json',
+    data: {card: paramObject},
+    success: function(data){
+      that.add(data);
+    }
+  })
+}
 
-// CardsCollection.prototype.fetch = function(){
-//   var that = this;
-//   $.ajax({
-//     url: '/emails',
-//     dataType: 'json',
-//     success: function(data){
-//       for (idx in data){
-//         that.add(data[idx]);
-//       }
-//     }
-//   })
-// }
+CardsCollection.prototype.fetch = function(){
+  var that = this;
+  $.ajax({
+    url: '/emails',
+    dataType: 'json',
+    success: function(data){
+      for (idx in data){
+        that.add(data[idx]);
+      }
+    }
+  })
+}
 
-// function clearAndDisplayCardsList(){
+function clearAndDisplayCardsList(){
 
-//   $('.cards-container').html('');
+  $('.cards-container').html('');
 
-//   for(idx in cardsCollection.models){
-//     var card      = cardsCollection.models[idx];
-//     var cardView  = new CardView(card);
-//     $('.cards-container').append(cardView.render().el);
-//   }
-// }
+  for(idx in cardsCollection.models){
+    var card      = cardsCollection.models[idx];
+    var cardView  = new CardView(card);
+    $('.cards-container').append(cardView.render().el);
+  }
+}
 
 // Contacts Show Button //
 
@@ -172,15 +172,14 @@ $(function(){
     clearAndDisplayContactsList();
   })
 
-  $('.hide-contacts').click(function(){
+  $('.hide-contacts').on('click', function(){
     $('#contacts-container').toggle();
-  });
+  })
 
   $('.show-cards').on('click', function(){
     $('#cards-container').load('/cards').hide().fadeIn('slow');
   });
-  $('.hide-cards').click(function(){
-    $('#cards-container').toggle();
-  })
 })
+
+
 
