@@ -54,4 +54,7 @@ gem 'pry-nav'
 gem 'nokogiri'
 gem 'mechanize'
 
+gem 'capistrano'
+gem 'rubber'
+gem 'therubyracer', group: :production
 
