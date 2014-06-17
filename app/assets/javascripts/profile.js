@@ -175,7 +175,7 @@ function clearAndDisplayContactsList(){
 function showContactsOnMap() {
    // 1. initialize mapOptions
     var mapOptions = {
-          zoom: 4,
+          zoom: 2,
           // center: myLatlng
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -269,8 +269,12 @@ $(function(){
 
   })
 
-  $('.show-contacts-on-map').on('click', function(){
-    contactsCollection.fetch();
+  // google.maps.event.addDomListener(window, 'load', function(){    
+  //   showContactsOnMap();    
+  // } );
+
+
+  $('.show-contacts-on-map').on('click', function(){ 
     showContactsOnMap();    
   })
 
