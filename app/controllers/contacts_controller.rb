@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
 
  def index
     # @user     = User.find(params[:id])
-    @contacts = Contact.all
+    @contacts = current_user.contacts
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
       format.html

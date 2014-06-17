@@ -34,8 +34,8 @@ section#contact {
 }
 
 div.contact img {
-  width: 100%;
-  height: 100%;
+  width: 375px;
+  height: 200px;
 }
 
 div.contact {
@@ -87,7 +87,7 @@ div.contact {
     @include prefixer(box-sizing, border-box);
     padding: 20px;
     height: 200px;
-    width: 200px;
+    width: 375px;
 
     position: absolute;
     top: 0;
