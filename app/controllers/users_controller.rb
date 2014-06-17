@@ -107,7 +107,7 @@ private
 
 
   def user_params
-    params.require(:user).permit(:email, :password, :pin)
+    params.require(:user).permit(:email, :password, :avatar_url, :pin)
   end
 
 end

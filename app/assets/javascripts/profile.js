@@ -152,7 +152,7 @@ ContactsCollection.prototype.fetch = function(){
 //incorporate delete ajax call with animate shrink for cards & contacts?
 
 function clearAndDisplayContactsList(){
-  $('.contacts-container').html('').fadeOut('slow');
+  $('#contacts-container').html('').fadeOut('slow');
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
