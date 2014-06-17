@@ -6,13 +6,14 @@ class ContactsController < ApplicationController
     @contacts = current_user.contacts
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
-      # format.html
+      format.html
     end
-    binding.pry
+    
   end
 
   def show
     @contact = Contact.find(params[:id])
+    binding.pry
   end
 
   def new
@@ -43,6 +44,10 @@ class ContactsController < ApplicationController
   def destroy
     Contact.delete(params[:id])
     redirect_to contact_path
+  end
+
+  def page_find
+    contact = Contact.find(params[:id])
   end
 
 private
