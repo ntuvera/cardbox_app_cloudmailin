@@ -173,12 +173,16 @@ $(function(){
   })
 
   $('.hide-contacts').on('click', function(){
-    $('#contacts-container').toggle();
+    $('#contacts-container').fadeOut('fast');
   })
 
   $('.show-cards').on('click', function(){
     $('#cards-container').load('/cards').hide().fadeIn('slow');
   });
+
+  $('.hide-cards').on('click', function(){
+    $('#cards-container').fadeOut('fast');
+  })
 })
 
 

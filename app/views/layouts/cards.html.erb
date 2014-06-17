@@ -1,4 +1,4 @@
-<div class="cards-container">
+
   <% current_user.cards.each do |card| %>
   <div class="saved-card">
     <%= image_tag(card.email.attachment_url, class: 'business-card') %>
@@ -33,5 +33,4 @@
     </div>
   </div>
 
-</div>
 <% end %>
