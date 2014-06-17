@@ -66,6 +66,8 @@ body {
   margin: 20px;
 }
 .contact{
+  height: 200px;
+  width: 350px;
   margin: 10px;
   border: 1px black solid;
 }

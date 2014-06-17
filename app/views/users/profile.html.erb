@@ -37,17 +37,16 @@
 
 
 
-<button id="show-cards">Show Cards</button>
-<button id='show-contacts'>Show Contacts</button>
+<button class="show-cards">Show Cards</button>
+<button class='show-contacts'>Show Contacts</button>
 
 <div class="contacts-container">
 </div>
 
 
 <div class="cards-container">
-
   <% current_user.cards.each do |card| %>
-  <div class="saved-contact">
+  <div class="saved-card">
     <%= image_tag(card.email.attachment_url, class: 'business-card') %>
     <p>" <%= card.email.message %> "</p>
     <div class="contact-info">

@@ -92,29 +92,27 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
+  var  $card      = $('<div>').attr('class','contact');
+  var  $front     = $('<div>').attr('class', 'front');
+  var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
+  var  $back      = $('<div>').attr('class', 'back');
+  var  $name      = $('<h5>').attr('class','contact-name').html(this.model.name);
+  var  $email     = $('<p>').attr('class','contact-email').html(this.model.email);
+  var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
+  var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
+  var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
+  ($card).append(($front).append($aimage)).append(($back)
+    .append($name).append($email).append($phone).append($linkedinid).append($location))
 
-    var newElement = $('.contacts-container').append($('<div>').attr('class','contact')) +
-      $('.contact').append($('<div>').attr('class','front')) + $('.front').append(($('<a>').attr('href','/')).append($('<img>').attr('src', this.model.card_image_url))) +
-      $('.contact').append($('<div>').attr('class', 'back')) + $('.back').append($('<span>').attr('class','contact-name').html(this.model.name)) + $('.contact-name').append($('<br>'))
-      $('.back').append($('<span>').attr('class','contact-name').html(this.model.name)) + $('.contact-name').append($('<br>'))
-      $('.back').append($('<span>').attr('class','contact-email').html(this.model.email)) + $('.contact-name').append($('<br>'))
-      $('.back').append($('<span>').attr('class','contact-phone').html(this.model.phone)) + $('.contact-name').append($('<br>'))
-      $('.back').append($('<span>').attr('class','contact-linkedinid').html(this.model.linkedinid)) + $('.contact-name').append($('<br>'))
-      $('.back').append($('<span>').attr('class','contact-location').html(this.model.location))
-  this.el = newElement;
-  return this;html
+  this.el = $card;
+  return this;
 }
 
 function ContactsCollection(){
   this.models = {};
 }
 
-ContactsCollection.prototype.add = function(contactJSON){
-  var newContact = new Contact(contactJSON);
-  this.models[contactJSON.id] = newContact;
-  $(this).trigger('addContactFlare');
-  return this;
-}
+
 
 ContactsCollection.prototype.create = function (paramObject){
   var that = this;
@@ -124,14 +122,22 @@ ContactsCollection.prototype.create = function (paramObject){
     dataType: 'json',
     data: {contact: paramObject},
     success: function(data){
-      that.add(data);
+      var contact = new Contact(data);
+      that.models[contact.id] = contact;
     }
   })
 }
 
+ContactsCollection.prototype.add = function(contactJSON){
+  var newContact = new Contact(contactJSON);
+  this.models[contactJSON.id] = newContact;
+  $(this).trigger('addFlare');
+  return this;
+}
+
+
 ContactsCollection.prototype.fetch = function(){
   var that = this;
-  console.log('before ajax');
   $.ajax({
     url: '/contacts',
     dataType: 'json',
@@ -140,44 +146,40 @@ ContactsCollection.prototype.fetch = function(){
         that.add(data[idx]);
       }
     }
-  }).done(function(){
-    clearAndDisplayContactsList();
   })
-}
+};
+
 //incorporate delete ajax call with animate shrink for cards & contacts?
 
 function clearAndDisplayContactsList(){
-  $('.contacts-container').html('');
-
+  $('.contacts-container').html('').fadeOut('slow');
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    $('.contacts-container').append(contactView.render().el);
+    $('.contacts-container').append(contactView.render().el).hide().show('slow')
   }
-
 }
 // show contacts button method?
 
-
 var contactsCollection = new ContactsCollection();
 var cardsCollection    = new CardsCollection();
+
 $(function(){
 
+  contactsCollection.fetch();
 
-  $('#show-contacts').on('click', function(){
-      contactsCollection.fetch();
-    // clearAndDisplayContactsList();
+  $('.show-contacts').on('click', function(){
+    clearAndDisplayContactsList();
+    // for(var id in contactsCollection.models){
+    //   var contact     = contactsCollection.models[id];
+    //   var contactView = new ContactView(contact);
+
+    // }
     // $('.contacts-container').load('/contacts').hide().fadeIn('slow');
   })
 
-  $('#show-cards').on('click', function(){
-    cardsCollection.fetch();
-    // clearAndDisplayCardsList();
+
   })
 
-  // $(contactsCollection).on('addFlare', function(){
-  //   clearAndDisplayContactsList();
-  // })
 
 
-})
