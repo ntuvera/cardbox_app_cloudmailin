@@ -6,12 +6,16 @@ class ContactsController < ApplicationController
     @contacts = current_user.contacts
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
-      # format.html
+      format.html
     end
   end
 
   def show
     @contact = Contact.find(params[:id])
+    respond_to do |format|
+      format.json { render :json => @contact.to_json }
+      format.html
+    end
   end
 
   def new

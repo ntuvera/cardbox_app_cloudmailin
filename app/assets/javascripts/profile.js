@@ -103,7 +103,7 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
-  var  $card      = $('<div>').attr('class','contact');
+  var  $card      = $('<div>').attr('class','contact '+this.model.id);
   var  $front     = $('<div>').attr('class', 'front');
   var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
   var  $back      = $('<div>').attr('class', 'back');
@@ -112,7 +112,7 @@ ContactView.prototype.render = function(){
   var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
   var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
   var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
-  var  $delButton = $('<button>').attr('class', 'delete-contact').html('delete');
+  var  $delButton = $('<button>').attr('class', 'delete-contact '+this.model.id).html('delete');
   ($card).append(($front).append($aimage)).append(($back)
     .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton));
 
@@ -140,17 +140,20 @@ ContactsCollection.prototype.create = function(paramObject){
   })
 }
 
-ContactsCollection.prototype.delete = function(){
+ContactsCollection.prototype.delete = function(contact){
   var that = this;
+  console.log(that)
   $.ajax({
-    url: '/contacts',
-    method: 'post',
+    url: '/contacts/' + contact,
+    method: 'DELETE',
     dataType: 'json',
-    type: 'delete',
     success: function(){
+    clearAndDisplayContactsList();
+    },
+    error: function(){
+      alert('delete failed');
     }
   });
-  event.preventDefault();
 }
 
 ContactsCollection.prototype.add = function(contactJSON){
@@ -274,6 +277,12 @@ $(function(){
 
   $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
+    $('.delete-contact').on('click', function(){
+    console.log('delete-contact button clicked');
+    $('.delete-contact').on('click', function(){
+      contactsCollection.delete(this.classList[1]);
+    })
+    })
   })
 
   $('.hide-contacts').on('click', function(){
@@ -293,8 +302,16 @@ $(function(){
     showContactsOnMap();
   })
 
-  $('.delete-contact').on('click', function(){
-    console.log('delete-contact button clicked');
+
+
+  $('#map-canvas').hide()
+
+  $('.show-contacts-on-map').on('click', function(){
+    $('#map-canvas').fadeIn('slow')
+  })
+
+  $('.hide-contacts-on-map').on('click', function(){
+    $('#map-canvas').fadeOut('fast')
   })
 
 })
