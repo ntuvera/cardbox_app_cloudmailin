@@ -148,7 +148,8 @@ ContactsCollection.prototype.delete = function(contact){
     method: 'DELETE',
     dataType: 'json',
     success: function(){
-    clearAndDisplayContactsList();
+      alert('contact deleted');
+      clearAndDisplayContactsList();
     },
     error: function(){
       alert('delete failed');
@@ -278,10 +279,7 @@ $(function(){
   $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
     $('.delete-contact').on('click', function(){
-    console.log('delete-contact button clicked');
-    $('.delete-contact').on('click', function(){
       contactsCollection.delete(this.classList[1]);
-    })
     })
   })
 
