@@ -249,7 +249,6 @@ var cardsCollection    = new CardsCollection();
 
 $(function(){
 
-
   contactsCollection.fetch();
 
   $('.show-contacts').on('click', function(){
@@ -266,13 +265,7 @@ $(function(){
 
   $('.hide-cards').on('click', function(){
     $('#cards-container').fadeOut('fast');
-
   })
-
-  // google.maps.event.addDomListener(window, 'load', function(){    
-  //   showContactsOnMap();    
-  // } );
-
 
   $('.show-contacts-on-map').on('click', function(){ 
     showContactsOnMap();    
