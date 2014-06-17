@@ -1,8 +1,10 @@
 
   <% current_user.cards.each do |card| %>
   <div class="saved-card">
-    <%= image_tag(card.email.attachment_url, class: 'business-card') %>
-    <p>" <%= card.email.message %> "</p>
+    <div class="card-image">
+        <%= image_tag(card.email.attachment_url, class: 'business-card') %>
+        <p>" <%= card.email.message %> "</p>
+    </div>
     <div class="contact-info">
       <%= form_for :contact, :url => '/contacts' do |f|%>
 

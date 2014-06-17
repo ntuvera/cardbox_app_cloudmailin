@@ -1,15 +1,3 @@
-<h1>Profile page</h1>
-
-<!-- <div class="profile header">
-  <form action="/logout" method='post'>
-    <%= token_tag %>
-    <input type="hidden" name="_method" value="delete">
-    <button class="btn btn-primary" type='submit'>Log Out</button>
-  </form>
-</div> -->
-
-<hr>
-
 
 <!-- if the current_user has supplied a pin, then hide a field
     otherwise, render a field and prompt to input the key.  save the pin to
@@ -19,10 +7,10 @@
   <h1>STEP 1: GET PIN</h1>
   <div class="linkedin_pin">
         <%= link_to "get pin", @authorize_url, target: '_blank' %>
-        <form action="/authorize" method="get">
+<!--         <form action="/authorize" method="get">
           <%= token_tag %>
           <input type="submit" value="get more info from linkedin">
-        </form>
+        </form> -->
         <%= @url %>
   </div>
   <h1>STEP 2: SET PIN</h1>

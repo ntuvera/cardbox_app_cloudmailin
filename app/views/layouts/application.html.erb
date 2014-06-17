@@ -6,7 +6,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-
+<script>
+$('#my_avatar').mouseover(function(){
+  console.log('mouseover in');
+ })
+</script>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6Cb5j7ll1l-WDHDG8vPjnfZxJpd5I_cI">
 </script>
