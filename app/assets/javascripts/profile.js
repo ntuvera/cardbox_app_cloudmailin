@@ -86,6 +86,77 @@ function clearAndDisplayContactsList(){
   }
 
 }
+
+function showContactsOnMap() {
+   // 1. initialize mapOptions
+    var mapOptions = {
+          zoom: 4,
+          // center: myLatlng
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+    // 2. get the div to show the map   
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    // 3. geocode address into latitude and longitude and drop a marker at that position
+    var geocoder = new google.maps.Geocoder();
+    
+    // 4. loop through all the contacts
+    for(idx in contactsCollection.models){   
+
+      var contact = contactsCollection.models[idx];  
+
+      var contactLocation = contact.location;
+      // console.log("contact location: ", contactLocation);
+    
+      // self calling function, that takes all the parameters for the marker/infowindow
+      // !!!
+      (function(contactLocation, contactName, contactEmail, contactCardImageUrl, contactPhone){
+        geocoder.geocode( {'address': contactLocation}, function(results, status) {
+        
+        // drop the marker (Callback function)  
+        if (status == google.maps.GeocoderStatus.OK) {
+         
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({ 
+              map: map,
+              position: results[0].geometry.location,
+              animation: google.maps.Animation.DROP,
+              title: contactName   
+            });
+
+            var contentString = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">'+contactName+'</h1>'+
+              '<div id="bodyContent">'+
+              '<p>email: <a href="mailto:'+contactEmail+'" target="_top">'+contactEmail+'</a></p>'+   
+              '<p>location: '+contactPhone+'</p>'+              
+              '<p>location: '+contactLocation+'</p>'+             
+              '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+                    
+              '</div>'+
+              '</div>';
+
+            marker.info = new google.maps.InfoWindow({
+              content:'<div style="width:320px; height:260px">'+contentString+'</div>'
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+              marker.info.open(map,marker);
+            });
+
+          } else { 
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+
+        });
+
+      })(contact.location, contact.name, contact.email, contact.card_image_url, contact.phone); // end self calling function
+
+     } // end for
+}
+
+
 // show contacts button method?
 
 
@@ -108,41 +179,7 @@ $(function(){
 
   $('.show-contacts-on-map').on('click', function(){
     contactsCollection.fetch();
-     
-    for(idx in contactsCollection.models){       
-      
-      var contact = contactsCollection.models[idx];  
-
-      // 1. get the location (address) of the contact 
-      var location = contact.location;
-      console.log(location);   
-      
-      // 2. initialize mapOptions
-      var mapOptions = {
-          zoom: 12,
-          // center: myLatlng
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-
-      // 3. get the div to show the map   
-      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-      // 4. geocode address into latitude and longitude and drop a marker at that position
-      var geocoder = new google.maps.Geocoder();
-    
-      geocoder.geocode( { 'address': location}, function(results, status) {
-
-        // drop the marker (Callback function)  
-        if (status == google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({  map: map,  position: results[0].geometry.location });
-          } else { 
-            alert("Geocode was not successful for the following reason: " + status);
-          }
-       });
-     } // end for
-
-  }) // end click
-
+    showContactsOnMap();    
+  })
 
 })
