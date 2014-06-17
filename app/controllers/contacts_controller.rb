@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-
+  include ContactsHelper
 
  def index
     # @user     = User.find(params[:id])
@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
-    binding.pry
+
   end
 
   def new
@@ -47,6 +47,7 @@ class ContactsController < ApplicationController
   end
 
   def page_find
+   
     contact = Contact.find(params[:id])
     @data = PageFind.find_on_linkedin(contact)
     #render @data as JSON...
