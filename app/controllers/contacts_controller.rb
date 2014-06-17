@@ -48,6 +48,8 @@ class ContactsController < ApplicationController
 
   def page_find
     contact = Contact.find(params[:id])
+    @data = PageFind.find_on_linkedin(contact)
+    #render @data as JSON...
   end
 
 private
