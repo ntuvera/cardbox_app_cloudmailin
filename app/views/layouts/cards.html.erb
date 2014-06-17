@@ -1,11 +1,16 @@
 <script>
-function validateUsername() {
-    var x = document.forms["name"].value;
-    if (x==null || x=="") {
-        alert("First name must be filled out");
-        return false;
-    }
-}
+// function validateUsername() {
+//     var x = document.forms["name"].value;
+//     if (x==null || x=="") {
+//         alert("First name must be filled out");
+//         return false;
+//     }
+// }
+  $('#delete-card').on('click', function(){
+    console.log('delete button clicked');
+    cardsCollection.delete();
+    console.log('after cardCollection.delete()')
+  })
 </script>
 
 
@@ -41,7 +46,7 @@ function validateUsername() {
         <%= f.submit %>
 
       <% end %>
-
+    <button id="delete-card">Delete</button>
     </div>
   </div>
 

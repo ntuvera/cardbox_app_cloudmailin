@@ -31,9 +31,11 @@ class UsersController < ApplicationController
   end
 
   def profile
-    # if request_token.authorize_url
-    #   @authorize_url = linkedin_client.request_token.authorize_url
-    # end
+   
+    if current_user.salt == "pepper"
+      @authorize_url = linkedin_client.request_token.authorize_url
+    end
+
   end
 
   def edit
@@ -59,7 +61,7 @@ client = linkedin_client
 
 # If you want to use one of the scopes from linkedin you have to pass it in at this point
 # You can learn more about it here: http://developer.linkedin.com/documents/authentication
-binding.pry
+#binding.pry
 request_token = client.request_token({}, :scope => "r_network")
 
 rtoken = request_token.token
