@@ -25,9 +25,10 @@ body {
 }
 
 #map-canvas {
-  width: 800px;
-  height: 400px;
+  width: 400px;
+  height: 200px;
   border: 1px solid red;
+  margin: 50px;
 }
 
 

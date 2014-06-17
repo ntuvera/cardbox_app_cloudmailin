@@ -1,4 +1,4 @@
-console.log('Stop Peeking...')
+console.log('Stop Peeking...!')
 
 function Card(cardJSON){
   this.name               = cardJSON.name;
@@ -94,18 +94,55 @@ var contactsCollection = new ContactsCollection();
 $(function(){
 
 
-
-  $('.show-contacts').on('click', function(){
+  $('.show_contacts').on('click', function(){
     contactsCollection.fetch();
     clearAndDisplayContactsList();
     $('.contacts-container').load('/contacts').hide().fadeIn('slow');
   })
 
 
-
   $(contactsCollection).on('addFlare', function(){
     clearAndDisplayContactsList();
   })
+
+
+  $('.show-contacts-on-map').on('click', function(){
+    contactsCollection.fetch();
+     
+    for(idx in contactsCollection.models){       
+      
+      var contact = contactsCollection.models[idx];  
+
+      // 1. get the location (address) of the contact 
+      var location = contact.location;
+      console.log(location);   
+      
+      // 2. initialize mapOptions
+      var mapOptions = {
+          zoom: 12,
+          // center: myLatlng
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+      // 3. get the div to show the map   
+      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+      // 4. geocode address into latitude and longitude and drop a marker at that position
+      var geocoder = new google.maps.Geocoder();
+    
+      geocoder.geocode( { 'address': location}, function(results, status) {
+
+        // drop the marker (Callback function)  
+        if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({  map: map,  position: results[0].geometry.location });
+          } else { 
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+       });
+     } // end for
+
+  }) // end click
 
 
 })

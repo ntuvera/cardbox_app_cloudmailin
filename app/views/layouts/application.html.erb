@@ -11,43 +11,35 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6Cb5j7ll1l-WDHDG8vPjnfZxJpd5I_cI">
 </script>
   
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(40.740019, -73.990087),
-          zoom: 10
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+ 
 
 
 </head>
 <body>
-     <header>
-        <h1>Welcome to the Future - Business Cards Organizer</h1>
-    </header>
+  <header>
+    <h1>Welcome to the Future - Business Cards Organizer</h1>
+  </header>
 
   <% if current_user %>
-  <div class="img" id="me">
-    <img id="my_avatar" src="<%= current_user.image_url %>" alt="Profile Picture" />
-  <%= current_user.email %> is logged in.
-    <form action="/logout" method='post'>
-      <%= token_tag %>
-      <input type="hidden" name="_method" value="delete">
-      <button class="btn btn-primary" type='submit'>Log Out</button>
-    </form>
-  </div>
-      <ul id="nav">
-        <li class="show_cards">Cards</li>
-        <li class="show_contacts">Contacts</li>
-      </ul>
-        <% end %>
-    </div>
 
-    <%= yield %>
+    <div class="img" id="me">
+      <img id="my_avatar" src="<%= current_user.image_url %>" alt="Profile Picture" />
+
+      <%= current_user.email %> is logged in.
+      <form action="/logout" method='post'>
+        <%= token_tag %>
+        <input type="hidden" name="_method" value="delete">
+        <button class="btn btn-primary" type='submit'>Log Out</button>
+      </form>
+    </div>
+    <ul id="nav">
+      <li class="show_cards">Cards</li>
+      <li class="show_contacts">Contacts</li>
+    </ul>      
+    
+  <% end %>
+    
+  <%= yield %>
 
 </body>
 </html>
