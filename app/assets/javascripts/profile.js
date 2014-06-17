@@ -114,7 +114,7 @@ function ContactsCollection(){
 
 
 
-ContactsCollection.prototype.create = function (paramObject){
+ContactsCollection.prototype.create = function(paramObject){
   var that = this;
   $.ajax({
     url: '/contacts',
@@ -124,6 +124,18 @@ ContactsCollection.prototype.create = function (paramObject){
     success: function(data){
       var contact = new Contact(data);
       that.models[contact.id] = contact;
+    }
+  })
+}
+
+ContactsCollection.prototype.delete = function(){
+  var that = this;
+  $.ajax({
+    url: '/contacts',
+    method: 'post',
+    dataType: 'json',
+    data: {_method: 'delete'},
+    success: function(){
     }
   })
 }

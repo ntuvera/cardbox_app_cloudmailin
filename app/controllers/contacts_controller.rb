@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
     @contacts = current_user.contacts
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
-      format.html
+      # format.html
     end
   end
 
@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.create(contact_params) # need to associate new contacts with user here
+    @contact = Contact.create(contact_params)
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
       format.html
