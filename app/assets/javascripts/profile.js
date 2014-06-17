@@ -48,6 +48,17 @@ CardsCollection.prototype.create = function(paramObject){
   })
 }
 
+CardsCollection.prototype.delete = function(){
+  var that = this;
+  $.ajax({
+    url: '/emails',
+    method: 'delete',
+    dataType: 'json',
+    success: function(){
+    }
+  })
+}
+
 CardsCollection.prototype.fetch = function(){
   var that = this;
   $.ajax({
@@ -92,7 +103,7 @@ function ContactView(model){
 }
 
 ContactView.prototype.render = function(){
-  var  $card      = $('<div>').attr('class','contact');
+  var  $card      = $('<div>').attr('class','contact '+this.model.id);
   var  $front     = $('<div>').attr('class', 'front');
   var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
   var  $back      = $('<div>').attr('class', 'back');
@@ -101,8 +112,9 @@ ContactView.prototype.render = function(){
   var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
   var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
   var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
+  var  $delButton = $('<button>').attr('class', 'delete-contact '+this.model.id).html('delete');
   ($card).append(($front).append($aimage)).append(($back)
-    .append($name).append($email).append($phone).append($linkedinid).append($location))
+    .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton));
 
   this.el = $card;
   return this;
@@ -128,16 +140,21 @@ ContactsCollection.prototype.create = function(paramObject){
   })
 }
 
-ContactsCollection.prototype.delete = function(){
+ContactsCollection.prototype.delete = function(contact){
   var that = this;
+  console.log(that)
   $.ajax({
-    url: '/contacts',
-    method: 'post',
+    url: '/contacts/' + contact,
+    method: 'DELETE',
     dataType: 'json',
-    data: {_method: 'delete'},
     success: function(){
+      alert('contact deleted');
+      clearAndDisplayContactsList();
+    },
+    error: function(){
+      alert('delete failed');
     }
-  })
+  });
 }
 
 ContactsCollection.prototype.add = function(contactJSON){
@@ -180,34 +197,39 @@ function showContactsOnMap() {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
-    // 2. get the div to show the map   
+
+    // 2. get the div to show the map
+
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
     // 3. geocode address into latitude and longitude and drop a marker at that position
     var geocoder = new google.maps.Geocoder();
-    
-    // 4. loop through all the contacts
-    for(idx in contactsCollection.models){   
 
-      var contact = contactsCollection.models[idx];  
+
+    // 4. loop through all the contacts
+    for(idx in contactsCollection.models){
+
+      var contact = contactsCollection.models[idx];
 
       var contactLocation = contact.location;
       // console.log("contact location: ", contactLocation);
-    
+
+
       // self calling function, that takes all the parameters for the marker/infowindow
       // !!!
       (function(contactLocation, contactName, contactEmail, contactCardImageUrl, contactPhone){
         geocoder.geocode( {'address': contactLocation}, function(results, status) {
-        
-        // drop the marker (Callback function)  
+
+
+        // drop the marker (Callback function)
         if (status == google.maps.GeocoderStatus.OK) {
-         
+
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({ 
+            var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location,
               animation: google.maps.Animation.DROP,
-              title: contactName   
+              title: contactName
             });
 
             var contentString = '<div id="content">'+
@@ -215,10 +237,11 @@ function showContactsOnMap() {
               '</div>'+
               '<h1 id="firstHeading" class="firstHeading">'+contactName+'</h1>'+
               '<div id="bodyContent">'+
-              '<p>email: <a href="mailto:'+contactEmail+'" target="_top">'+contactEmail+'</a></p>'+   
-              '<p>location: '+contactPhone+'</p>'+              
-              '<p>location: '+contactLocation+'</p>'+             
-              '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+                    
+              '<p>email: <a href="mailto:'+contactEmail+'" target="_top">'+contactEmail+'</a></p>'+
+              '<p>location: '+contactPhone+'</p>'+
+              '<p>location: '+contactLocation+'</p>'+
+              '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
+
               '</div>'+
               '</div>';
 
@@ -230,7 +253,7 @@ function showContactsOnMap() {
               marker.info.open(map,marker);
             });
 
-          } else { 
+          } else {
             alert("Geocode was not successful for the following reason: " + status);
           }
 
@@ -242,10 +265,11 @@ function showContactsOnMap() {
 }
 
 
-// show contacts button method?
 
 var contactsCollection = new ContactsCollection();
 var cardsCollection    = new CardsCollection();
+
+
 
 $(function(){
 
@@ -253,6 +277,9 @@ $(function(){
 
   $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
+    $('.delete-contact').on('click', function(){
+      contactsCollection.delete(this.classList[1]);
+    })
   })
 
   $('.hide-contacts').on('click', function(){
@@ -267,8 +294,18 @@ $(function(){
     $('#cards-container').fadeOut('fast');
   })
 
-  $('.show-contacts-on-map').on('click', function(){ 
-    showContactsOnMap();    
+  $('.show-contacts-on-map').on('click', function(){
+    showContactsOnMap();
+  })
+
+  $('#map-canvas').hide()
+
+  $('.show-contacts-on-map').on('click', function(){
+    $('#map-canvas').fadeIn('slow')
+  })
+
+  $('.hide-contacts-on-map').on('click', function(){
+    $('#map-canvas').fadeOut('fast')
   })
 
 })
