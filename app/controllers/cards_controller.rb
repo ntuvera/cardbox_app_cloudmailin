@@ -2,6 +2,10 @@ class CardsController < ApplicationController
 
   def index
     @cards = Card.all
+    respond_to do |format|
+      format.json { render :json => @cards.to_json }
+      format.html
+    end
   end
 
   def show
@@ -15,6 +19,10 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.create(card_params)
+    respond_to do |format|
+      format.json { render :json => @cards.to_json }
+      format.html
+    end
     redirect_to cards_path
   end
 

@@ -12,18 +12,18 @@
 
 
 <!-- if the current_user has supplied a pin, then hide a field
-    otherwise, render a field and prompt to input the key.  save the pin to 
+    otherwise, render a field and prompt to input the key.  save the pin to
     the database.  -->
 
 <% unless current_user.pin %>
   <h1>STEP 1: GET PIN</h1>
   <div class="linkedin_pin">
         <%= link_to "get pin", @authorize_url, target: '_blank' %>
-        <form action="/authorize" method="get"> 
-          <%= token_tag %>                
-          <input type="submit" value="get more info from linkedin">        
+        <form action="/authorize" method="get">
+          <%= token_tag %>
+          <input type="submit" value="get more info from linkedin">
         </form>
-        <%= @url %> 
+        <%= @url %>
   </div>
   <h1>STEP 2: SET PIN</h1>
   <div>
@@ -36,25 +36,21 @@
 <hr>
 
 
-<div class="img" id="me">
-  <img src="<%= current_user.image_url%>" alt="Profile Picture" />
 
-</div>
-
-
-<button class='show-contacts'>Show Contacts</button>
+<button id="show-cards">Show Cards</button>
+<button id='show-contacts'>Show Contacts</button>
 
 <div class="contacts-container">
 </div>
 
 
-<div class="cards container">
+<div class="cards-container">
 
   <% current_user.cards.each do |card| %>
-  <div class="saved card">
+  <div class="saved-contact">
     <%= image_tag(card.email.attachment_url, class: 'business-card') %>
     <p>" <%= card.email.message %> "</p>
-    <div class="contact info">
+    <div class="contact-info">
       <%= form_for :contact, :url => '/contacts' do |f|%>
 
         <%= f.label :name %>

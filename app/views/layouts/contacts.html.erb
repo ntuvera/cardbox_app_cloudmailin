@@ -1,4 +1,4 @@
-<h1>THIS IS THE CONTACTS</h1>
+
 <% current_user.contacts.each do |contact| %>
     <div class="contact">
         <div class="front">
@@ -16,3 +16,16 @@
     </div>
 <% end %>
 
+
+<script>
+
+($('<div>').attr('class','contact').append(($('<div>').attr('class','front')))).append($('<img>').attr('src', 'this.model.card_image_url'))
+
+$('.contact').append($('<div>').attr('class','back').append($('<span>').attr('class', 'contact-name').text(this.model.name)
+$('.back').append($('<span>').attr('class', 'contact-email').text(this.model.email))
+$('.back').append($('<span>').attr('class', 'contact-phone').text(this.model.phone))
+$('.back').append($('<span>').attr('class', 'contact-linkedinid').text(this.model.linkedinid))
+$('.back').append($('<span>').attr('class', 'contact-location').text(this.model.location))
+$('.back').append($('<span>').attr('class', 'contact-network').text(this.model.network))
+
+</script>

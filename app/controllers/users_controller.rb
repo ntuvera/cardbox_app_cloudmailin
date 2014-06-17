@@ -31,7 +31,9 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @authorize_url = linkedin_client.request_token.authorize_url
+    # if request_token.authorize_url
+    #   @authorize_url = linkedin_client.request_token.authorize_url
+    # end
   end
 
   def edit
@@ -62,7 +64,7 @@ request_token = client.request_token({}, :scope => "r_network")
 
 rtoken = request_token.token
 rsecret = request_token.secret
- 
+
 # to test from your desktop, open the following url in your browser
 # and record the pin it gives you
 #request_token.authorize_url
@@ -87,8 +89,8 @@ redirect_to client.request_token.authorize_url
 
 
 # you're now free to move about the cabin, call any API method
-  
-    
+
+
 # client.connections
 # binding.pry
 
@@ -99,7 +101,7 @@ redirect_to client.request_token.authorize_url
 private
   def linkedin_client
     consumer_key = current_user.consumer_key
-    consumer_secret = current_user.consumer_secret  
+    consumer_secret = current_user.consumer_secret
     LinkedIn::Client.new(consumer_key, consumer_secret)
   end
 
