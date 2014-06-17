@@ -131,7 +131,7 @@ ContactsCollection.prototype.create = function(paramObject){
 ContactsCollection.prototype.delete = function(){
   var that = this;
   $.ajax({
-    url: '/contacts',
+    url: '/contacts/[contact.id]',
     method: 'post',
     dataType: 'json',
     data: {_method: 'delete'},
