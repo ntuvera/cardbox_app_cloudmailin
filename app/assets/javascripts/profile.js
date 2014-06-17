@@ -193,11 +193,14 @@ function showContactsOnMap() {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
+
     // 2. get the div to show the map
+
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
     // 3. geocode address into latitude and longitude and drop a marker at that position
     var geocoder = new google.maps.Geocoder();
+
 
     // 4. loop through all the contacts
     for(idx in contactsCollection.models){
@@ -207,10 +210,12 @@ function showContactsOnMap() {
       var contactLocation = contact.location;
       // console.log("contact location: ", contactLocation);
 
+
       // self calling function, that takes all the parameters for the marker/infowindow
       // !!!
       (function(contactLocation, contactName, contactEmail, contactCardImageUrl, contactPhone){
         geocoder.geocode( {'address': contactLocation}, function(results, status) {
+
 
         // drop the marker (Callback function)
         if (status == google.maps.GeocoderStatus.OK) {
@@ -232,6 +237,7 @@ function showContactsOnMap() {
               '<p>location: '+contactPhone+'</p>'+
               '<p>location: '+contactLocation+'</p>'+
               '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
+
               '</div>'+
               '</div>';
 
@@ -253,6 +259,7 @@ function showContactsOnMap() {
 
      } // end for
 }
+
 
 
 var contactsCollection = new ContactsCollection();
@@ -279,6 +286,7 @@ $(function(){
 
   $('.hide-cards').on('click', function(){
     $('#cards-container').fadeOut('fast');
+
   })
 
   $('.show-contacts-on-map').on('click', function(){
