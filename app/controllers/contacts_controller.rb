@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  include ContactsHelper
 
 
  def index
@@ -50,6 +51,17 @@ class ContactsController < ApplicationController
         format.html
       end
     # redirect_to contact_path
+  end
+
+  def page_find
+    contact = Contact.find(params[:id])
+    @data = PageFind.find_on_linkedin(contact)
+    #render @data as JSON...
+    respond_to do |format|
+      format.json { render :json => @data.to_json }
+      format.html
+    end
+    binding.pry
   end
 
 private

@@ -20,7 +20,13 @@
   <% if current_user %>
 
     <div class="img" id="me">
+
+      <% if current_user.image_url %>
       <img id="my_avatar" src="<%= current_user.image_url %>" alt="Profile Picture" />
+      <% else %>
+        <img id="my_avatar" src="<%=asset_url('navatar.jpg')%>" alt="Profile Picture" />
+      <% end %>
+
     <%= current_user.email %> is logged in.
     <%= link_to "LogOut", logout_path, method: :delete %>
       <% else %>
