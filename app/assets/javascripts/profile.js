@@ -48,15 +48,19 @@ CardsCollection.prototype.create = function(paramObject){
   })
 }
 
-CardsCollection.prototype.delete = function(){
+CardsCollection.prototype.delete = function(email){
   var that = this;
   $.ajax({
-    url: '/emails',
-    method: 'delete',
+    url: '/emails/' + email,
+    method: 'DELETE',
     dataType: 'json',
     success: function(){
+      alert('card deleted');
+    },
+    error: function(){
+      alert('card delete failed');
     }
-  })
+  });
 }
 
 CardsCollection.prototype.fetch = function(){
@@ -149,7 +153,7 @@ ContactsCollection.prototype.delete = function(contact){
     dataType: 'json',
     success: function(){
       alert('contact deleted');
-      clearAndDisplayContactsList();
+
     },
     error: function(){
       alert('delete failed');
@@ -178,7 +182,7 @@ ContactsCollection.prototype.fetch = function(){
   })
 };
 
-//incorporate delete ajax call with animate shrink for cards & contacts?
+
 
 function clearAndDisplayContactsList(){
   $('#contacts-container').html('').fadeOut('slow');
@@ -288,6 +292,10 @@ $(function(){
 
   $('.show-cards').on('click', function(){
     $('#cards-container').load('/cards').hide().fadeIn('slow');
+    $('.delete-card').on('click', function(){
+      alert('delete card clicked');
+      cardsCollection.delete(this.classList[1]);
+    })
   });
 
   $('.hide-cards').on('click', function(){
