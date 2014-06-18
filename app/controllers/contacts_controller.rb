@@ -26,7 +26,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.create(contact_params)
     respond_to do |format|
-      format.json { render :json => @contacts.to_json }
+      format.json { render :json => @contact.to_json }
       format.html
     end
     redirect_to profile_path

@@ -144,7 +144,7 @@ ContactsCollection.prototype.create = function(paramObject){
   })
 }
 
-ContactsCollection.prototype.delete = function(contact){
+ContactsCollection.prototype.delete = function(contact, parent){
   var that = this;
   console.log(that)
   $.ajax({
@@ -153,8 +153,8 @@ ContactsCollection.prototype.delete = function(contact){
     dataType: 'json',
     success: function(){
       alert('contact deleted');
-
-    },
+      parent.fadeOut('fast');
+        },
     error: function(){
       alert('delete failed');
     }
@@ -282,6 +282,7 @@ $(function(){
   $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
     $('.delete-contact').on('click', function(){
+      var parent = $(this).parent().parent()
       contactsCollection.delete(this.classList[1]);
     })
   })
