@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_filter :require_login, :only => :profile
 
   def index
+
     @users = User.all
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-
+    @contact = Contact.new
     if current_user.salt == "pepper"
       @authorize_url = linkedin_client.request_token.authorize_url
 
@@ -112,5 +113,10 @@ private
   def user_params
     params.require(:user).permit(:email, :password, :avatar_url, :pin)
   end
+
+  def contact_params
+    params.require(:contact).permit(:name, :email, :linkedin_id, :phone, :location, :note, :network, :card_image_url, :card_received_date, :user_id)
+  end
+
 
 end

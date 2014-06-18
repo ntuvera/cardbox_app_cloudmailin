@@ -48,7 +48,7 @@
         <p>" <%= card.email.message %> "</p>
     </div>
     <div class="contact-info">
-      <%= form_for :contact, :url => '/contacts' do |f|%>
+      <%= form_for(@contact, remote: true, format: :json) do |f|%>
 
         <%= f.label :name %>
         <%= f.text_field :name, :value => card.email.subject %><br>
