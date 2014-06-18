@@ -1,5 +1,5 @@
 class ChangeColumnAttachmentNameToAttachmentUrl < ActiveRecord::Migration
   def change
-  rename_column :emails, :attachment_name, :attachment_url
+  add_column :emails, :attachment_url, :string
   end
 end

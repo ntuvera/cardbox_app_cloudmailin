@@ -1,14 +1,105 @@
-#Name of App
+#Card_Box_
 
-<hr>
+<br>
 
-What do you do with your stacks of business cards after an networking event?  Which card belongs to who?  Keep track of your new found contacts quickly and conveniently with "app name here".
+[insert Screenshot here]
 
-APIs and Authentication
-* LinkedIn
+<i>What do you do with your stacks of business cards after an networking event?  Which card belongs to who?  Keep track of your new found contacts quickly and conveniently with "app name here".</i>
+
+[insert some code here]
+
+Gems used in deployment
+
+```
+  gem 'rails_12factor', group: :production
+  gem 'rest-client', '~> 1.6.7'
+  gem 'sorcery'
+  gem 'omniauth'
+  gem 'omniauth-linkedin'
+  gem 'linkedin'
+  gem 'nokogiri'
+  gem 'mechanize'
+```
+
+External Services & APIs
+
 * CloudMailin
 * Google Maps
-* OCR (need name from Paul)
+* LinkedIn
 
+
+
+## Directions
+
+Create an account with Card_box_ through either created a user or Signing in with LinkedIn.  Using LinkedIn will provide further features such as a people search.  *WIP
+
+[insert screen shot of log in]
+
+Send an email to [cloudmailin.net] and attach a picture of a received businesscard or anything for that matter.  
+
+
+[insert picture]
+
+
+Fill in the subject with the Name of your subject and add a memo about the subject in the body of of yoru text.  
+
+[insert screen shot of text fields]
+
+
+Card_Box_ will receive and process your email and be ready for when you sign on to manage cards and create conacts.
+
+
+[saved contacts screen shot]
+
+Once you create a contact, it will be saved on virtual businescards with important data and the ability to the search LinkedIn for information pertaining to that user's name.
+
+[insert screen shot of map with marked lcoations]
+
+You can also view your connections and where you've met them to get an idea of where you're networking the most.
+
+
+
+```
+  def authorize_linkedin
+
+    client = linkedin_client
+    request_token = client.request_token({}, :scope => "r_network")
+
+    rtoken = request_token.token
+    rsecret = request_token.secret
+
+    redirect_to client.request_token.authorize_url
+
+  end
+```
+
+
+
+
+```
+ContactView.prototype.render = function(){
+  var  $card      = $('<div>').attr('class','contact '+this.model.id);
+  var  $front     = $('<div>').attr('class', 'front');
+  var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
+  var  $back      = $('<div>').attr('class', 'back');
+  var  $name      = $('<h>').attr('class','contact-name').html(this.model.name);
+  var  $email     = $('<p>').attr('class','contact-email').html(this.model.email);
+  var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
+  var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
+  var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
+  var  $delButton = $('<button>').attr('class', 'delete-contact '+this.model.id).html('delete');
+
+  var $profilesButton = $('<button>').attr('class', 'find-contact '+this.model.id).html('find on Linkedin');
+
+
+  ($card).append(($front).append($aimage)).append(($back)
+    .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton).append($profilesButton));
+
+  this.el = $card;
+  return this;
+}
+```
 
 Andrea focused on the back end and authentication.  Paul focused on the API tie-ins and coordinated tasks.  Nate focused on the front-end and Javascript
+
+[source](https://github.com/ntuvera/cardbox_app_cloudmailin) code available at github.com

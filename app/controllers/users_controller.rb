@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_filter :require_login, :only => :profile
 
   def index
+
     @users = User.all
     respond_to do |format|
       format.json { render :json => @contacts.to_json }
@@ -30,10 +31,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def profile      
+  def profile  
+    @contact = Contact.new    
     if current_user.provider == "linkedin"  
       linkedin_client.authorize_from_access(current_user.linkedin_accesskey1, current_user.linkedin_accesskey2)    
-      @connections = linkedin_client.connections      
+      @connections = linkedin_client.connections 
     end
   end
 
@@ -58,9 +60,13 @@ class UsersController < ApplicationController
     @client ||= LinkedIn::Client.new(ENV['LINKEDIN_ID'], ENV['LINKEDIN_SECRET'])
   end
 
-
   def user_params
     params.require(:user).permit(:email, :password)
   end
+
+  def contact_params
+    params.require(:contact).permit(:name, :email, :linkedin_id, :phone, :location, :note, :network, :card_image_url, :card_received_date, :user_id)
+  end
+
 
 end

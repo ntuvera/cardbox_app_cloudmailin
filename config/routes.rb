@@ -36,4 +36,5 @@ Rails.application.routes.draw do
 
   get '/contacts/:id/find' => 'contacts#page_find'
 
+
 end

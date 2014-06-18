@@ -48,7 +48,9 @@ CardsCollection.prototype.create = function(paramObject){
   })
 }
 
+
 CardsCollection.prototype.delete = function(email){
+
   var that = this;
   $.ajax({
     url: '/emails/' + email,
@@ -111,14 +113,18 @@ ContactView.prototype.render = function(){
   var  $front     = $('<div>').attr('class', 'front');
   var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
   var  $back      = $('<div>').attr('class', 'back');
-  var  $name      = $('<h5>').attr('class','contact-name').html(this.model.name);
+  var  $name      = $('<h>').attr('class','contact-name').html(this.model.name);
   var  $email     = $('<p>').attr('class','contact-email').html(this.model.email);
   var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
   var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
   var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
   var  $delButton = $('<button>').attr('class', 'delete-contact '+this.model.id).html('delete');
+
+  var $profilesButton = $('<button>').attr('class', 'find-contact '+this.model.id).html('find on Linkedin');
+
+
   ($card).append(($front).append($aimage)).append(($back)
-    .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton));
+    .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton).append($profilesButton));
 
   this.el = $card;
   return this;
@@ -144,7 +150,9 @@ ContactsCollection.prototype.create = function(paramObject){
   })
 }
 
+
 ContactsCollection.prototype.delete = function(contact){
+
   var that = this;
   console.log(that)
   $.ajax({
@@ -152,9 +160,10 @@ ContactsCollection.prototype.delete = function(contact){
     method: 'DELETE',
     dataType: 'json',
     success: function(){
-      alert('contact deleted');
-
+      $('.contact.' + contact ).fadeOut('slow');
+      contactsCollection.models = {};
     },
+
     error: function(){
       alert('delete failed');
     }
@@ -166,7 +175,7 @@ ContactsCollection.prototype.add = function(contactJSON){
   this.models[contactJSON.id] = newContact;
   $(this).trigger('addFlare');
   return this;
-}
+};
 
 
 ContactsCollection.prototype.fetch = function(){
@@ -175,6 +184,7 @@ ContactsCollection.prototype.fetch = function(){
     url: '/contacts',
     dataType: 'json',
     success: function(data){
+
       for (idx in data){
         that.add(data[idx]);
       }
@@ -182,14 +192,74 @@ ContactsCollection.prototype.fetch = function(){
   })
 };
 
+function LinkedInResultView(data){
+  this.name = data.name;
+  this.link = data.page_url;
+  this.image = data.image;
+  this.location = data.location;
+  this.job = data.job_title;
+  // that = this;
+  this.el = undefined;
+
+}
+LinkedInResultView.prototype.render = function(){
+  var $li = $('<li>').addClass('linked-item');
+  var $nameSpan = $('<p>').addClass('name-span listed').text(this.name);
+  var $image = $('<div>').addClass('linked-img listed').html("<img src='"+this.image+"' alt=''>");
+  var $linkSpan = $('<p>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'> profile </a>");
+  var $locationSpan = $('<p>').addClass('location-span listed').text(this.location);
+  var $jobTitleSpan = $('<p>').addClass('job-span listed').text(this.job);
+
+  // $li.append('<hr/>')
+  $li.append($image);
+  $li.append($nameSpan);
+  $li.append($linkSpan);
+  $li.append($locationSpan);
+  $li.append($jobTitleSpan);
+  this.el = $li
+  return this;
+
+}
+
+ContactsCollection.prototype.findOnLinkedIn = function(contact){
+
+  var that = this;
+  //needs to select the right contact
+  $.ajax({
+    url: '/contacts/'+ contact + '/find',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data){
+
+    var $div = $('<div>').addClass('linked-profiles');
+    var $ul = $('<ul>').addClass('linked-results');
+    $div.append($ul);
+    $('body').append($div);
+      for ( idx in data){
+        console.log(data[idx])
+        // $('body').append($('<li>').html(data[idx].name))
+
+         var newPerson = new LinkedInResultView(data[idx]);
+
+        $('.linked-results').append(newPerson.render().el)
+        $('.linked-results').append('<hr/>')
+      }
+    },
+    error: function(){
+
+    }
+  });
+}
 
 
 function clearAndDisplayContactsList(){
   $('#contacts-container').html('').fadeOut('slow');
+  contactsCollection.fetch();
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    $('#contacts-container').append(contactView.render().el).hide().show('slow')
+    // contactView.render().el;
+    $('#contacts-container').append(contactView.render().el).show('slow')
   }
 }
 
@@ -288,7 +358,6 @@ function showContactsOnMap() {
 }
 
 
-
 var contactsCollection = new ContactsCollection();
 var cardsCollection    = new CardsCollection();
 
@@ -296,22 +365,35 @@ var cardsCollection    = new CardsCollection();
 
 $(function(){
 
-
   contactsCollection.fetch();
 
   $('.show-contacts').on('click', function(){
-    clearAndDisplayContactsList();          // necessary? need to convert erb to appendable js?
+    contactsCollection.fetch();
+    clearAndDisplayContactsList();
+
+    $('.find-contact').on('click', function(){
+
+      $('.linked-results').html('');
+      contactsCollection.findOnLinkedIn(this.classList[1])
+
+    });
+
     $('.delete-contact').on('click', function(){
       contactsCollection.delete(this.classList[1]);
-    })
-  })
+      contactsCollection.fetch();
+    });
+  });
 
   $('.hide-contacts').on('click', function(){
     $('#contacts-container').fadeOut('fast');
   })
 
+
+  $('#cards-container').hide();
+
+
   $('.show-cards').on('click', function(){
-    $('#cards-container').load('/cards').hide().fadeIn('slow');
+    $('#cards-container').fadeIn('slow');
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
@@ -335,9 +417,10 @@ $(function(){
     $('#map-canvas').fadeIn('slow')
   })
 
+  $('#contacts-container').hide();
+
   $('.hide-contacts-on-map').on('click', function(){
     $('#map-canvas').fadeOut('fast')
   })
 
 })
-
