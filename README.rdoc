@@ -41,26 +41,33 @@ Send an email to [cloudmailin.net] and attach a picture of a received businessca
 ![take a picture](http://simpleorganizedlife.com/wp-content/uploads/2009/10/IMG_0156-375x281.jpg)
 
 
-Fill in the subject with the Name of your subject and add a memo about the subject in the body of of your text.  
+Fill in the subject with the Name of your subject and add a memo about the subject in the body of of your text.  Several fields will be pre-populated, others are your's to fill in. *Hint: OCR in the works*
+<br>
+
 
 ![form fill](
 https://s3.amazonaws.com/business_card_images/form_fill_screenshot.png)
 
 
 Card_Box_ will receive and process your email and be ready for when you sign on to manage cards and create conacts.
+<br>
+
 
 
 ![saved contacts](
 https://s3.amazonaws.com/business_card_images/contacts_ss.png)
 
 Once you create a contact, it will be saved on virtual businescards with important data and the ability to the search LinkedIn for information pertaining to that user's name.
+<br>
 
 ![map contacts location](
 https://s3.amazonaws.com/business_card_images/map_loc_ss.png)
 
 You can also view your connections and where you've met them to get an idea of where you're networking the most.
 
+<hr>
 
+###Coding Lessons taken away
 
 ```
   def authorize_linkedin
@@ -75,6 +82,7 @@ You can also view your connections and where you've met them to get an idea of w
 
   end
 ```
+OAuth for LinkedIn API calls, is not simple.  This is only a bit of seemingly readable code, that took many hours to have functioning.
 
 
 
@@ -102,7 +110,12 @@ ContactView.prototype.render = function(){
   return this;
 }
 ```
+Rendering those contacts, best to break into bits and build up.
+
+###Distribution of Labor
 
 Andrea focused on the back end and authentication.  Paul focused on the API tie-ins and coordinated tasks.  Nate focused on the front-end and Javascript
 
+
+<Hr>
 [source](https://github.com/ntuvera/cardbox_app_cloudmailin) code available at github.com
