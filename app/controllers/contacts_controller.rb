@@ -51,6 +51,10 @@ class ContactsController < ApplicationController
     contact = Contact.find(params[:id])
     @data = PageFind.find_on_linkedin(contact)
     #render @data as JSON...
+    respond_to do |format|
+      format.json { render :json => @data.to_json }
+      format.html
+    end
   end
 
 private
