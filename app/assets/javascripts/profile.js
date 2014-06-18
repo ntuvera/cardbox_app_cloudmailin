@@ -280,7 +280,7 @@ $(function(){
   contactsCollection.fetch();
 
   $('.show-contacts').on('click', function(){
-    clearAndDisplayContactsList();
+    clearAndDisplayContactsList();          // necessary? need to convert erb to appendable js?
     $('.delete-contact').on('click', function(){
       contactsCollection.delete(this.classList[1]);
     })
@@ -295,6 +295,7 @@ $(function(){
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
+    clearAndDisplayCardsList();      
     })
   });
 
