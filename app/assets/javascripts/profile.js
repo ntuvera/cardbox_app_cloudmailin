@@ -237,10 +237,12 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     $div.append($ul);
     $('body').append($div);
     
+      for (var idx = 0; idx < 10; idx++) {
+       
 
-      for ( idx in data){
-        console.log(data[idx])
-        // $('body').append($('<li>').html(data[idx].name))
+      // for ( idx in data){
+      //   console.log(data[idx])
+      // $('body').append($('<li>').html(data[idx].name))
 
          var newPerson = new LinkedInResultView(data[idx]);
         
