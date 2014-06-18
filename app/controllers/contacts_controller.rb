@@ -30,9 +30,7 @@ class ContactsController < ApplicationController
       format.json { render :json => @contact.to_json }
       format.html
     end
-    redirect_to profile_path
     # if @contact(name: params[:name])           # need error render if contact already exists with same name
-
   end
 
   def edit

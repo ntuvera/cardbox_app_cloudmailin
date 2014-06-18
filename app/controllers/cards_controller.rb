@@ -23,11 +23,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.create(card_params)
-    respond_to do |format|
-      format.json { render :json => @cards.to_json }
-      format.html
-    end
-    redirect_to cards_path
+    render :json => @cards.to_json
   end
 
   def edit

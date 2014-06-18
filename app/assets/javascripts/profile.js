@@ -111,7 +111,7 @@ ContactView.prototype.render = function(){
   var  $front     = $('<div>').attr('class', 'front');
   var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
   var  $back      = $('<div>').attr('class', 'back');
-  var  $name      = $('<h5>').attr('class','contact-name').html(this.model.name);
+  var  $name      = $('<h>').attr('class','contact-name').html(this.model.name);
   var  $email     = $('<p>').attr('class','contact-email').html(this.model.email);
   var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
   var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
@@ -153,7 +153,7 @@ ContactsCollection.prototype.delete = function(contact, parent){
     dataType: 'json',
     success: function(){
       alert('contact deleted');
-      parent.fadeOut('fast');
+      $('.contact.' + contact ).fadeOut('slow');
         },
     error: function(){
       alert('delete failed');
@@ -291,8 +291,10 @@ $(function(){
     $('#contacts-container').fadeOut('fast');
   })
 
+  $('#cards-container').hide();
+
   $('.show-cards').on('click', function(){
-    $('#cards-container').load('/cards').hide().fadeIn('slow');
+    $('#cards-container').fadeIn('slow');
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
