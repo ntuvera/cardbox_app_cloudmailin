@@ -10,6 +10,10 @@ class EmailsController < ApplicationController
 
   def show
     @email = Email.find(params[:id])
+    respond_to do |format|
+      format.json { render :json => @email.to_json }
+      format.html
+    end
   end
 
   def new
@@ -33,7 +37,10 @@ class EmailsController < ApplicationController
 
   def destroy
     Email.delete(params[:id])
-    redirect_to emails_path
+      respond_to do |format|
+        format.json { render :json => @emails.to_json }
+        format.html
+      end
   end
 
 private
