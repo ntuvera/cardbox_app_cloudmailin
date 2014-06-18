@@ -161,9 +161,6 @@ ContactsCollection.prototype.delete = function(contact){
     dataType: 'json',
     success: function(){
       $('.contact.' + contact ).fadeOut('slow');
-      clearAndDisplayContactsList();
-
-
         },
 
     error: function(){
@@ -236,13 +233,10 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     var $ul = $('<ul>').addClass('linked-results');
     $div.append($ul);
     $('body').append($div);
-<<<<<<< HEAD
 
-=======
-    
+
       for (var idx = 0; idx < 10; idx++) {
-       
->>>>>>> 3a60d93661634c7e1bda8e4165708afbb2e4920c
+
 
       // for ( idx in data){
       //   console.log(data[idx])
@@ -263,6 +257,7 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
 
 function clearAndDisplayContactsList(){
   $('#contacts-container').html('').fadeOut('slow');
+  contactsCollection.fetch();
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
@@ -346,7 +341,6 @@ function showContactsOnMap() {
 }
 
 
-
 var contactsCollection = new ContactsCollection();
 var cardsCollection    = new CardsCollection();
 
@@ -359,8 +353,15 @@ $(function(){
 
 
   $('.show-contacts').on('click', function(){
-    contactsCollection.fetch();
     clearAndDisplayContactsList();
+    // contactsCollection.fetch();
+    // for(idx in contactsCollection.models){
+    //   var contact     = contactsCollection.models[idx];
+    //   var contactView = new ContactView(contact);
+    //   $('#contacts-container').append(contactView.render().el)
+    // }
+
+
 
     $('.find-contact').on('click', function(){
 
@@ -369,8 +370,9 @@ $(function(){
 
     });
     $('.delete-contact').on('click', function(){
-
       contactsCollection.delete(this.classList[1]);
+      contactsCollection.fetch();
+      clearAndDisplayContactsList();
     });
   });
 
@@ -403,6 +405,8 @@ $(function(){
   $('.show-contacts-on-map').on('click', function(){
     $('#map-canvas').fadeIn('slow')
   })
+
+  $('#contacts-container').hide();
 
   $('.hide-contacts-on-map').on('click', function(){
     $('#map-canvas').fadeOut('fast')

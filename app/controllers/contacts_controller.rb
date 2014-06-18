@@ -59,7 +59,7 @@ class ContactsController < ApplicationController
       format.json { render :json => @data.to_json }
       format.html
     end
-    binding.pry
+
   end
 
 private
