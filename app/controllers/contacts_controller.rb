@@ -2,7 +2,6 @@ class ContactsController < ApplicationController
   include ContactsHelper
 
 
-
  def index
     # @user     = User.find(params[:id])
     @contacts = current_user.contacts
@@ -10,7 +9,6 @@ class ContactsController < ApplicationController
       format.json { render :json => @contacts.to_json }
       format.html
     end
-    
   end
 
   def show
@@ -19,7 +17,6 @@ class ContactsController < ApplicationController
       format.json { render :json => @contact.to_json }
       format.html
     end
-
   end
 
   def new
@@ -31,7 +28,7 @@ class ContactsController < ApplicationController
     @contact = Contact.create(contact_params)
     respond_to do |format|
       format.json { render :json => @contact.to_json }
-      format.html { redirect_to profile_path }   # stops create contacts from breaking, just a work around
+      format.html { redirect_to profile_path }   # stops create contacts from breaking, just a work around refreshes page
     end
     # if @contact(name: params[:name])           # need error render if contact already exists with same name
   end
@@ -55,7 +52,6 @@ class ContactsController < ApplicationController
   end
 
   def page_find
-
     contact = Contact.find(params[:id])
     @data = PageFind.find_on_linkedin(contact)
     #render @data as JSON...
@@ -63,7 +59,7 @@ class ContactsController < ApplicationController
       format.json { render :json => @data.to_json }
       format.html
     end
-
+    binding.pry
   end
 
 private
