@@ -1,3 +1,21 @@
+<script>
+  $('.show-cards').on('click', function(){
+    $('#cards-container').load('/cards').hide().fadeIn('slow');
+
+  });
+
+  $('.hide-cards').on('click', function(){
+    $('#cards-container').fadeOut('fast');
+  })
+
+  $('.delete-card').on('click', function(){
+    alert('delete card clicked');
+    cardsCollection.delete(this.classList[1]);
+  })
+</script>
+
+
+
 <div id="cards-container">
 <% current_user.cards.each do |card| %>
   <div class="saved-card">
@@ -33,6 +51,7 @@
       <% end %>
 
     </div>
+    <button class='delete-card <%= card.email.id %>'>Delete</button>
   </div>
 
   <% end %>

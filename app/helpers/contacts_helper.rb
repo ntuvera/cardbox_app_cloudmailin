@@ -47,7 +47,7 @@ module ContactsHelper
 
         profiles.push(item)
       end
-      binding.pry
+
     return profiles
 
   end

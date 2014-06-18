@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   resources :cards
   resources :contacts
   resources :users
-#find profiles by doing linkedin public with mechanize
-  get '/contacts/:id/find' => 'contacts#page_find' 
+
+  get '/contacts/:id/find' => 'contacts#page_find'
 
 
 end
