@@ -31,9 +31,10 @@ class UsersController < ApplicationController
   end
 
   def profile
-   
+
     if current_user.salt == "pepper"
       @authorize_url = linkedin_client.request_token.authorize_url
+
     end
 
   end

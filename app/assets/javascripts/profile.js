@@ -189,8 +189,32 @@ ContactsCollection.prototype.fetch = function(){
 };
 
 function LinkedInResultView(data){
-  this.name = data[idx].name
-  this.link = data[idx].page_url
+  this.name = data.name;
+  this.link = data.page_url;
+  this.image = data.image;
+  this.location = data.location;
+  this.job = data.job_title;
+  // that = this;
+  this.el = undefined;
+
+}
+LinkedInResultView.prototype.render = function(){
+  var $li = $('<li>').addClass('linked-item');
+  var $nameSpan = $('<span>').addClass('name-span listed').text(this.name);
+  var $image = $('<div>').addClass('linked-img listed').html("<img src='"+this.image+"' alt=''>");
+  var $linkSpan = $('<span>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'>profile</a>");
+  var $locationSpan = $('<span>').addClass('location-span listed').text(this.location);
+  var $jobTitleSpan = $('<span>').addClass('job-span listed').text(this.job);
+
+  // $li.append('<hr/>')
+  $li.append($image);
+  $li.append($nameSpan);
+  $li.append($linkSpan);
+  $li.append($locationSpan);
+  $li.append($jobTitleSpan); 
+  this.el = $li
+  return this;
+
 }
 
 ContactsCollection.prototype.findOnLinkedIn = function(contact){
@@ -203,12 +227,20 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     dataType: 'json',
     success: function(data){
     
-    test = data
+    var $div = $('<div>').addClass('linked-profiles');
+    var $ul = $('<ul>').addClass('linked-results');
+    $div.append($ul);
+    $('body').append($div);
+    
+
       for ( idx in data){
         console.log(data[idx])
-        $('body').append($('<li>').html(data[idx].name))
-        // var newPerson = new LinkedinResultView(data[idx]);
-        // $('body').append(newPerson.render().el)
+        // $('body').append($('<li>').html(data[idx].name))
+
+         var newPerson = new LinkedInResultView(data[idx]);
+        
+        $('.linked-results').append(newPerson.render().el)
+        $('.linked-results').append('<hr/>')
       }
     },
     error: function(){
@@ -320,6 +352,7 @@ $(function(){
 /////***********
     $('.find-contact').on('click', function(){
       //this is the click event
+      $('.linked-results').html('');
       contactsCollection.findOnLinkedIn(this.classList[1])
       
     });
