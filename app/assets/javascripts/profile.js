@@ -161,7 +161,8 @@ ContactsCollection.prototype.delete = function(contact){
     dataType: 'json',
     success: function(){
       $('.contact.' + contact ).fadeOut('slow');
-        },
+      contactsCollection.models = {};
+    },
 
     error: function(){
       alert('delete failed');
@@ -261,7 +262,8 @@ function clearAndDisplayContactsList(){
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    $('#contacts-container').append(contactView.render().el).hide().show('slow')
+    // contactView.render().el;
+    $('#contacts-container').append(contactView.render().el).show('slow')
   }
 }
 
@@ -353,15 +355,8 @@ $(function(){
 
 
   $('.show-contacts').on('click', function(){
+    contactsCollection.fetch();
     clearAndDisplayContactsList();
-    // contactsCollection.fetch();
-    // for(idx in contactsCollection.models){
-    //   var contact     = contactsCollection.models[idx];
-    //   var contactView = new ContactView(contact);
-    //   $('#contacts-container').append(contactView.render().el)
-    // }
-
-
 
     $('.find-contact').on('click', function(){
 
@@ -372,7 +367,6 @@ $(function(){
     $('.delete-contact').on('click', function(){
       contactsCollection.delete(this.classList[1]);
       contactsCollection.fetch();
-      clearAndDisplayContactsList();
     });
   });
 
