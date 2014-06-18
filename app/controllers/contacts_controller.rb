@@ -30,12 +30,10 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.create(contact_params)
     respond_to do |format|
-      format.json { render :json => @contacts.to_json }
-      format.html
+      format.json { render :json => @contact.to_json }
+      format.html { redirect_to profile_path }   # stops create contacts from breaking, just a work around
     end
-    redirect_to profile_path
     # if @contact(name: params[:name])           # need error render if contact already exists with same name
-
   end
 
   def edit

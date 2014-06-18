@@ -113,7 +113,7 @@ ContactView.prototype.render = function(){
   var  $front     = $('<div>').attr('class', 'front');
   var  $aimage    = $('<a>').attr('href', '/').append(($('<img>').attr('src', this.model.card_image_url)));
   var  $back      = $('<div>').attr('class', 'back');
-  var  $name      = $('<h5>').attr('class','contact-name').html(this.model.name);
+  var  $name      = $('<h>').attr('class','contact-name').html(this.model.name);
   var  $email     = $('<p>').attr('class','contact-email').html(this.model.email);
   var  $phone     = $('<p>').attr('class','contact-phone').html(this.model.phone);
   var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
@@ -149,8 +149,10 @@ ContactsCollection.prototype.create = function(paramObject){
     }
   })
 }
+
  
 ContactsCollection.prototype.delete = function(contact){
+
   var that = this;
   console.log(that)
   $.ajax({
@@ -158,9 +160,12 @@ ContactsCollection.prototype.delete = function(contact){
     method: 'DELETE',
     dataType: 'json',
     success: function(){
+      $('.contact.' + contact ).fadeOut('slow');
       clearAndDisplayContactsList();
 
-    },
+      
+        },
+
     error: function(){
       alert('delete failed');
     }
@@ -348,16 +353,17 @@ $(function(){
 
 
   $('.show-contacts').on('click', function(){
+    contactsCollection.fetch();
     clearAndDisplayContactsList();
-/////***********
+
     $('.find-contact').on('click', function(){
-      //this is the click event
+     
       $('.linked-results').html('');
       contactsCollection.findOnLinkedIn(this.classList[1])
       
     });
     $('.delete-contact').on('click', function(){
-      debugger
+
       contactsCollection.delete(this.classList[1]);
     });
   });
@@ -365,9 +371,13 @@ $(function(){
   $('.hide-contacts').on('click', function(){
     $('#contacts-container').fadeOut('fast');
   })
- 
+
+
+  $('#cards-container').hide();
+
+
   $('.show-cards').on('click', function(){
-    $('#cards-container').load('/cards').hide().fadeIn('slow');
+    $('#cards-container').fadeIn('slow');
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
