@@ -192,7 +192,7 @@ function clearAndDisplayContactsList(){
 function showContactsOnMap() {
    // 1. initialize mapOptions
     var mapOptions = {
-          zoom: 4,
+          zoom: 2,
           // center: myLatlng
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -273,7 +273,6 @@ var cardsCollection    = new CardsCollection();
 
 $(function(){
 
-
   contactsCollection.fetch();
 
   $('.show-contacts').on('click', function(){
@@ -293,14 +292,11 @@ $(function(){
 
   $('.hide-cards').on('click', function(){
     $('#cards-container').fadeOut('fast');
-
   })
 
   $('.show-contacts-on-map').on('click', function(){
     showContactsOnMap();
   })
-
-
 
   $('#map-canvas').hide()
 

@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
    
     @user[:consumer_key] = omniauth_hash["extra"]['access_token'].consumer.key
     @user[:consumer_secret] = omniauth_hash["extra"]['access_token'].consumer.secret    
-    @user[:image_url] = omniauth_hash["info"]["image"]
+    @user[:image_url] = omniauth_hash["info"]["image"]    
     @user.save!       
 
     session[:user_id] = @user.id 
