@@ -280,9 +280,10 @@ $(function(){
   contactsCollection.fetch();
 
   $('.show-contacts').on('click', function(){
+    contactsCollection.fetch();
     clearAndDisplayContactsList();
     $('.delete-contact').on('click', function(){
-      var parent = $(this).parent().parent()
+      // var parent = $(this).parent().parent()
       contactsCollection.delete(this.classList[1]);
     })
   })
