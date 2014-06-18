@@ -15,18 +15,15 @@ class SessionsController < ApplicationController
     end    
   end
 
-  def create_linkedin
+  def create_linkedin        
     omniauth_hash = env["omniauth.auth"]
-    @user = User.from_omniauth(omniauth_hash)
-   
-    @user[:consumer_key] = omniauth_hash["extra"]['access_token'].consumer.key
-    @user[:consumer_secret] = omniauth_hash["extra"]['access_token'].consumer.secret    
-    @user[:image_url] = omniauth_hash["info"]["image"]    
-    @user.save!       
-
+    @user = User.from_omniauth(omniauth_hash)   
+    @user.linkedin_accesskey1 = omniauth_hash['credentials']['token']
+    @user.linkedin_accesskey2 = omniauth_hash['credentials']['secret']
+    @user[:image_url] = omniauth_hash["info"]["image"]
+    @user.save!           
     session[:user_id] = @user.id 
-    redirect_to profile_path  
-    
+    redirect_to profile_path      
   end
 
   def destroy
