@@ -38,22 +38,25 @@ Create an account with Card_box_ through either created a user or Signing in wit
 Send an email to [cloudmailin.net] and attach a picture of a received businesscard or anything for that matter.  
 
 
-[insert picture]
+![take a picture](http://simpleorganizedlife.com/wp-content/uploads/2009/10/IMG_0156-375x281.jpg)
 
 
-Fill in the subject with the Name of your subject and add a memo about the subject in the body of of yoru text.  
+Fill in the subject with the Name of your subject and add a memo about the subject in the body of of your text.  
 
-[insert screen shot of text fields]
+![form fill](
+https://s3.amazonaws.com/business_card_images/form_fill_screenshot.png)
 
 
 Card_Box_ will receive and process your email and be ready for when you sign on to manage cards and create conacts.
 
 
-[saved contacts screen shot]
+![saved contacts](
+https://s3.amazonaws.com/business_card_images/contacts_ss.png)
 
 Once you create a contact, it will be saved on virtual businescards with important data and the ability to the search LinkedIn for information pertaining to that user's name.
 
-[insert screen shot of map with marked lcoations]
+![map contacts location](
+https://s3.amazonaws.com/business_card_images/map_loc_ss.png)
 
 You can also view your connections and where you've met them to get an idea of where you're networking the most.
 
