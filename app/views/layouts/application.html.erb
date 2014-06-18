@@ -6,15 +6,10 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-<script>
-$('#my_avatar').mouseover(function(){
-  console.log('mouseover in');
- })
-</script>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6Cb5j7ll1l-WDHDG8vPjnfZxJpd5I_cI">
-</script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6Cb5j7ll1l-WDHDG8vPjnfZxJpd5I_cI">
+  </script>
 
 </head>
 <body>
@@ -25,7 +20,7 @@ $('#my_avatar').mouseover(function(){
   <% if current_user %>
 
     <div class="img" id="me">
-      <img id="my_avatar" src="<%= current_user.image_url %>" alt="Profile Picture" />
+      <img id="my_avatar" src="<%= current_user.avatar_url %>" alt="Profile Picture" />
     <%= current_user.email %> is logged in.
     <%= link_to "LogOut", logout_path, method: :delete %>
       <% else %>
@@ -33,26 +28,18 @@ $('#my_avatar').mouseover(function(){
         <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %> or
         <%= link_to 'LogIn', login_path %>
     </div>
+    
   <% end %>
 
-   <!--  <div class="img" id="me">
-      <img id="my_avatar" src="<%= current_user.image_url %>" alt="Profile Picture" />
+  <div class="navigation-bar">
+    <div class="navbar show-cards">Show Saved Cards</div>
+    <div class="navbar hide-cards">Hide Saved Cards</div>
+    <div class='navbar show-contacts'>Show Contacts</div>
+    <div class='navbar hide-contacts'>Hide Contacts</div>
+    <div class='navbar show-contacts-on-map'>Show Contacts on Map</div>
+    <div class='navbar hide-contacts-on-map'>Hide Contacts on Map</div>
+  </div>
 
-      <%= current_user.email %> is logged in.
-      <form action="/logout" method='post'>
-        <%= token_tag %>
-        <input type="hidden" name="_method" value="delete">
-        <button class="btn btn-primary" type='submit'>Log Out</button>
-      </form>
-      
-    </div> -->
-    <ul id="nav">
-      <li class="show_cards">Cards</li>
-      <li class="show_contacts">Contacts</li>
-    </ul>      
-    
-
-    
   <%= yield %>
 
 </body>

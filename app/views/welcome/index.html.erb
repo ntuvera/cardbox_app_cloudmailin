@@ -8,16 +8,16 @@
         <p>Logged in as <%= current_user.email %></p>
         <%= link_to "LogOut", logout_path, method: :delete %>
     <% else %>
-        <%= link_to 'SignUp', signup_path %> or 
-        <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %> or 
+        <%= link_to 'SignUp', signup_path %> or
+        <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %> or
         <%= link_to 'LogIn', login_path %>
     <% end %>
 
 </div>
 
 
-<button class='show-contacts-on-map'>Show Contacts on Map</button>
-
-<div id="map-canvas"/>
+<!-- <button class='show-contacts-on-map'>Show Contacts on Map</button> -->
+<!--
+<div id="map-canvas"/> -->
 
 
