@@ -1,8 +1,11 @@
 #Name of App
 
-<hr>
+<br>
 
-What do you do with your stacks of business cards after an networking event?  Which card belongs to who?  Keep track of your new found contacts quickly and conveniently with "app name here".
+[inser image here]
+
+<i>What do you do with your stacks of business cards after an networking event?  Which card belongs to who?  Keep track of your new found contacts quickly and conveniently with "app name here".</i>
+
 
 APIs and Authentication
 * LinkedIn

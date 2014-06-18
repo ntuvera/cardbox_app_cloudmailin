@@ -36,5 +36,6 @@ Rails App Created **(6-12-2014)**
 - Linked in API scraping functional, implementing to application
 
 **(6-18-2014)**
+xw
 - LinkedIn API authorization issues
-- 
+- Bootstrap styling
