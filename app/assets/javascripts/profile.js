@@ -258,7 +258,6 @@ function clearAndDisplayContactsList(){
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    // contactView.render().el;
     $('#contacts-container').append(contactView.render().el).show('slow')
   }
 }
@@ -270,7 +269,7 @@ function mapInitialize(){
     var mapOptions = {
           zoom: 3,
           center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
-          mapTypeId: google.maps.MapTypeId.ROADMAP          
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
     // 2. get the div to show the map
@@ -397,8 +396,8 @@ $(function(){
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
-    clearAndDisplayCardsList();    
-    clearAndDisplayContactsList();  
+      clearAndDisplayCardsList();
+      clearAndDisplayContactsList();
     })
   });
 
