@@ -193,18 +193,37 @@ function clearAndDisplayContactsList(){
   }
 }
 
-function showContactsOnMap() {
-   // 1. initialize mapOptions
+
+function mapInitialize(){
+
+    // 1. initialize mapOptions
     var mapOptions = {
-          zoom: 2,
-          // center: myLatlng
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          zoom: 3,
+          center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
+          mapTypeId: google.maps.MapTypeId.ROADMAP          
         }
 
-
     // 2. get the div to show the map
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+}
 
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+function showContactsOnMap() {
+   // // 1. initialize mapOptions
+   //  var mapOptions = {
+   //        zoom: 2,
+   //        // center: myLatlng
+   //        mapTypeId: google.maps.MapTypeId.ROADMAP
+   //      }
+
+
+   //  // 2. get the div to show the map
+
+   //  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // 3. geocode address into latitude and longitude and drop a marker at that position
     var geocoder = new google.maps.Geocoder();
@@ -277,6 +296,7 @@ var cardsCollection    = new CardsCollection();
 
 $(function(){
 
+
   contactsCollection.fetch();
 
   $('.show-contacts').on('click', function(){
@@ -295,7 +315,8 @@ $(function(){
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
-    clearAndDisplayCardsList();      
+    clearAndDisplayCardsList();    
+    clearAndDisplayContactsList();  
     })
   });
 
@@ -304,6 +325,7 @@ $(function(){
   })
 
   $('.show-contacts-on-map').on('click', function(){
+    mapInitialize();
     showContactsOnMap();
   })
 

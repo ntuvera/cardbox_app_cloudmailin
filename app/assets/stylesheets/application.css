@@ -38,8 +38,9 @@ body {
   margin: 10px;
 }
 #map-canvas {
-  width: 800px;
+/*  width: 800px;*/
   height: 400px;
+  height: 100%;
   border: 1px solid red;
   margin: 50px;
 }

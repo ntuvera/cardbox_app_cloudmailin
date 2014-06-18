@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617154956) do
+ActiveRecord::Schema.define(version: 20140618195546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(version: 20140617154956) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",            null: false
-    t.string   "crypted_password", null: false
-    t.string   "salt",             null: false
+    t.string   "email",               null: false
+    t.string   "crypted_password",    null: false
+    t.string   "salt",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user"
@@ -61,10 +61,8 @@ ActiveRecord::Schema.define(version: 20140617154956) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.string   "image_url"
-    t.string   "consumer_key"
-    t.string   "consumer_secret"
-    t.string   "pin"
-    t.string   "avatar_url"
+    t.string   "linkedin_accesskey1"
+    t.string   "linkedin_accesskey2"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
