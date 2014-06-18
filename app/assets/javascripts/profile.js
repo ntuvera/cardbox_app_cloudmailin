@@ -188,6 +188,11 @@ ContactsCollection.prototype.fetch = function(){
   })
 };
 
+function LinkedInResultView(data){
+  this.name = data[idx].name
+  this.link = data[idx].page_url
+}
+
 ContactsCollection.prototype.findOnLinkedIn = function(contact){
 
   var that = this;
@@ -197,10 +202,13 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     method: 'GET',
     dataType: 'json',
     success: function(data){
-    //get back data (hash)
-    //append first five(or more) to the dom as divs inside a ul
+    
+    test = data
       for ( idx in data){
-        console.log(idx['name'])
+        console.log(data[idx])
+        $('body').append($('<li>').html(data[idx].name))
+        // var newPerson = new LinkedinResultView(data[idx]);
+        // $('body').append(newPerson.render().el)
       }
     },
     error: function(){
