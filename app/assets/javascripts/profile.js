@@ -1,5 +1,5 @@
 console.log('Stop Peeking...!')
- 
+
 // Cards Show Button //
 function Card(cardJSON){
   this.name               = cardJSON.name;
@@ -12,29 +12,29 @@ function Card(cardJSON){
   this.card_received_date = cardJSON.card_received_date;
   this.id                 = cardJSON.id;
 }
- 
+
 function CardView(model){
   this.model    = model;
   this.el       = undefined;
 }
- 
+
 CardView.prototype.render = function(){
   var newCardEl = $('<div>').html('card append test');
   this.el       = newCardEl;
   return this;
 }
- 
+
 function CardsCollection(){
   this.models = {};
 }
- 
+
 CardsCollection.prototype.add = function(cardJSON){
   var newCard = new Card(cardJSON);
   this.models[cardJSON.id] = newCard;
   $(this).trigger('addCardFlare');
   return this;
 }
- 
+
 CardsCollection.prototype.create = function(paramObject){
   var that = this;
   $.ajax({
@@ -64,7 +64,7 @@ CardsCollection.prototype.delete = function(email){
     }
   });
 }
- 
+
 CardsCollection.prototype.fetch = function(){
   var that = this;
   $.ajax({
@@ -77,20 +77,20 @@ CardsCollection.prototype.fetch = function(){
     }
   })
 }
- 
+
 function clearAndDisplayCardsList(){
- 
+
   $('.cards-container').html('');
- 
+
   for(idx in cardsCollection.models){
     var card      = cardsCollection.models[idx];
     var cardView  = new CardView(card);
     $('.cards-container').append(cardView.render().el);
   }
 }
- 
+
 // Contacts Show Button //
- 
+
 function Contact(contactJSON){
   this.name               = contactJSON.name;
   this.email              = contactJSON.email;
@@ -102,12 +102,12 @@ function Contact(contactJSON){
   this.card_received_date = contactJSON.card_received_date;
   this.id                 = contactJSON.id;
 }
- 
+
 function ContactView(model){
   this.model  = model;
   this.el     = undefined;
 }
- 
+
 ContactView.prototype.render = function(){
   var  $card      = $('<div>').attr('class','contact '+this.model.id);
   var  $front     = $('<div>').attr('class', 'front');
@@ -125,17 +125,17 @@ ContactView.prototype.render = function(){
 
   ($card).append(($front).append($aimage)).append(($back)
     .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton).append($profilesButton));
- 
+
   this.el = $card;
   return this;
 }
- 
+
 function ContactsCollection(){
   this.models = {};
 }
- 
- 
- 
+
+
+
 ContactsCollection.prototype.create = function(paramObject){
   var that = this;
   $.ajax({
@@ -150,7 +150,7 @@ ContactsCollection.prototype.create = function(paramObject){
   })
 }
 
- 
+
 ContactsCollection.prototype.delete = function(contact){
 
   var that = this;
@@ -163,7 +163,7 @@ ContactsCollection.prototype.delete = function(contact){
       $('.contact.' + contact ).fadeOut('slow');
       clearAndDisplayContactsList();
 
-      
+
         },
 
     error: function(){
@@ -171,15 +171,15 @@ ContactsCollection.prototype.delete = function(contact){
     }
   });
 }
- 
+
 ContactsCollection.prototype.add = function(contactJSON){
   var newContact = new Contact(contactJSON);
   this.models[contactJSON.id] = newContact;
   $(this).trigger('addFlare');
   return this;
 };
- 
- 
+
+
 ContactsCollection.prototype.fetch = function(){
   var that = this;
   $.ajax({
@@ -205,18 +205,18 @@ function LinkedInResultView(data){
 }
 LinkedInResultView.prototype.render = function(){
   var $li = $('<li>').addClass('linked-item');
-  var $nameSpan = $('<span>').addClass('name-span listed').text(this.name);
+  var $nameSpan = $('<p>').addClass('name-span listed').text(this.name);
   var $image = $('<div>').addClass('linked-img listed').html("<img src='"+this.image+"' alt=''>");
-  var $linkSpan = $('<span>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'>profile</a>");
-  var $locationSpan = $('<span>').addClass('location-span listed').text(this.location);
-  var $jobTitleSpan = $('<span>').addClass('job-span listed').text(this.job);
+  var $linkSpan = $('<p>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'> profile </a>");
+  var $locationSpan = $('<p>').addClass('location-span listed').text(this.location);
+  var $jobTitleSpan = $('<p>').addClass('job-span listed').text(this.job);
 
   // $li.append('<hr/>')
   $li.append($image);
   $li.append($nameSpan);
   $li.append($linkSpan);
   $li.append($locationSpan);
-  $li.append($jobTitleSpan); 
+  $li.append($jobTitleSpan);
   this.el = $li
   return this;
 
@@ -231,25 +231,25 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     method: 'GET',
     dataType: 'json',
     success: function(data){
-    
+
     var $div = $('<div>').addClass('linked-profiles');
     var $ul = $('<ul>').addClass('linked-results');
     $div.append($ul);
     $('body').append($div);
-    
+
 
       for ( idx in data){
         console.log(data[idx])
         // $('body').append($('<li>').html(data[idx].name))
 
          var newPerson = new LinkedInResultView(data[idx]);
-        
+
         $('.linked-results').append(newPerson.render().el)
         $('.linked-results').append('<hr/>')
       }
     },
     error: function(){
-      
+
     }
   });
 }
@@ -263,7 +263,7 @@ function clearAndDisplayContactsList(){
     $('#contacts-container').append(contactView.render().el).hide().show('slow')
   }
 }
- 
+
 function showContactsOnMap() {
    // 1. initialize mapOptions
     var mapOptions = {
@@ -271,34 +271,34 @@ function showContactsOnMap() {
           // center: myLatlng
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
- 
- 
+
+
     // 2. get the div to show the map
- 
+
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
- 
+
     // 3. geocode address into latitude and longitude and drop a marker at that position
     var geocoder = new google.maps.Geocoder();
- 
- 
+
+
     // 4. loop through all the contacts
     for(idx in contactsCollection.models){
- 
+
       var contact = contactsCollection.models[idx];
- 
+
       var contactLocation = contact.location;
       // console.log("contact location: ", contactLocation);
- 
- 
+
+
       // self calling function, that takes all the parameters for the marker/infowindow
       // !!!
       (function(contactLocation, contactName, contactEmail, contactCardImageUrl, contactPhone){
         geocoder.geocode( {'address': contactLocation}, function(results, status) {
- 
- 
+
+
         // drop the marker (Callback function)
         if (status == google.maps.GeocoderStatus.OK) {
- 
+
             map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: map,
@@ -306,7 +306,7 @@ function showContactsOnMap() {
               animation: google.maps.Animation.DROP,
               title: contactName
             });
- 
+
             var contentString = '<div id="content">'+
               '<div id="siteNotice">'+
               '</div>'+
@@ -316,40 +316,40 @@ function showContactsOnMap() {
               '<p>location: '+contactPhone+'</p>'+
               '<p>location: '+contactLocation+'</p>'+
               '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
- 
+
               '</div>'+
               '</div>';
- 
+
             marker.info = new google.maps.InfoWindow({
               content:'<div style="width:320px; height:260px">'+contentString+'</div>'
             });
- 
+
             google.maps.event.addListener(marker, 'click', function() {
               marker.info.open(map,marker);
             });
- 
+
           } else {
             alert("Geocode was not successful for the following reason: " + status);
           }
- 
+
         });
- 
+
       })(contact.location, contact.name, contact.email, contact.card_image_url, contact.phone); // end self calling function
- 
+
      } // end for
 }
- 
- 
- 
+
+
+
 var contactsCollection = new ContactsCollection();
 var cardsCollection    = new CardsCollection();
- 
- 
- 
+
+
+
 $(function(){
- 
+
   contactsCollection.fetch();
- 
+
 
 
   $('.show-contacts').on('click', function(){
@@ -357,17 +357,17 @@ $(function(){
     clearAndDisplayContactsList();
 
     $('.find-contact').on('click', function(){
-     
+
       $('.linked-results').html('');
       contactsCollection.findOnLinkedIn(this.classList[1])
-      
+
     });
     $('.delete-contact').on('click', function(){
 
       contactsCollection.delete(this.classList[1]);
     });
   });
- 
+
   $('.hide-contacts').on('click', function(){
     $('#contacts-container').fadeOut('fast');
   })
@@ -383,23 +383,23 @@ $(function(){
       cardsCollection.delete(this.classList[1]);
     })
   });
- 
+
   $('.hide-cards').on('click', function(){
     $('#cards-container').fadeOut('fast');
   })
- 
+
   $('.show-contacts-on-map').on('click', function(){
     showContactsOnMap();
   })
- 
+
   $('#map-canvas').hide()
- 
+
   $('.show-contacts-on-map').on('click', function(){
     $('#map-canvas').fadeIn('slow')
   })
- 
+
   $('.hide-contacts-on-map').on('click', function(){
     $('#map-canvas').fadeOut('fast')
   })
- 
+
 })
