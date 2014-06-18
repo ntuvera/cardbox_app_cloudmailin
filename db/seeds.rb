@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+   contacts = Contact.create([{ name: 'Paul Wolf', email: 'hoot@hoot.com', location: 'San Francisco, CA', note:'met at a place', card_image_url:'https://apps.carleton.edu/reason_package/reason_4.0/www/images/273169.jpg', user_id: 2}, 
+    { name: 'D Wolf', email: 'hoot1@hoot.com', location: 'San Francisco, CA', note:'met at an place', card_image_url:'https://apps.carleton.edu/reason_package/reason_4.0/www/images/273169.jpg', user_id: 2}])

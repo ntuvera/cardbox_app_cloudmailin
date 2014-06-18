@@ -119,8 +119,12 @@ ContactView.prototype.render = function(){
   var  $linkedinid= $('<p>').attr('class','contact-linkedinid').html(this.model.linkedinid);
   var  $location  = $('<p>').attr('class','contact-location').html(this.model.location);
   var  $delButton = $('<button>').attr('class', 'delete-contact '+this.model.id).html('delete');
+
+  var $profilesButton = $('<button>').attr('class', 'find-contact '+this.model.id).html('find on Linkedin');
+
+
   ($card).append(($front).append($aimage)).append(($back)
-    .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton));
+    .append($name).append($email).append($phone).append($linkedinid).append($location).append($delButton).append($profilesButton));
  
   this.el = $card;
   return this;
@@ -154,7 +158,7 @@ ContactsCollection.prototype.delete = function(contact){
     method: 'DELETE',
     dataType: 'json',
     success: function(){
-      alert('contact deleted');
+      clearAndDisplayContactsList();
 
     },
     error: function(){
@@ -168,7 +172,7 @@ ContactsCollection.prototype.add = function(contactJSON){
   this.models[contactJSON.id] = newContact;
   $(this).trigger('addFlare');
   return this;
-}
+};
  
  
 ContactsCollection.prototype.fetch = function(){
@@ -184,6 +188,26 @@ ContactsCollection.prototype.fetch = function(){
   })
 };
 
+ContactsCollection.prototype.findOnLinkedIn = function(contact){
+
+  var that = this;
+  //needs to select the right contact
+  $.ajax({
+    url: '/contacts/'+ contact + '/find',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data){
+    //get back data (hash)
+    //append first five(or more) to the dom as divs inside a ul
+      for ( idx in data){
+        console.log(idx['name'])
+      }
+    },
+    error: function(){
+      
+    }
+  });
+}
 
 
 function clearAndDisplayContactsList(){
@@ -281,12 +305,21 @@ $(function(){
  
   contactsCollection.fetch();
  
+
+
   $('.show-contacts').on('click', function(){
     clearAndDisplayContactsList();
+/////***********
+    $('.find-contact').on('click', function(){
+      //this is the click event
+      contactsCollection.findOnLinkedIn(this.classList[1])
+      
+    });
     $('.delete-contact').on('click', function(){
+      debugger
       contactsCollection.delete(this.classList[1]);
-    })
-  })
+    });
+  });
  
   $('.hide-contacts').on('click', function(){
     $('#contacts-container').fadeOut('fast');
