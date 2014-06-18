@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-   contacts = Contact.create([{ name: 'Thomas Wolf', email: 'hoot@hoot.com', location: 'New York, NY', note:'met at a place', card_image_url:'https://apps.carleton.edu/reason_package/reason_4.0/www/images/273169.jpg', user_id: 1}, 
-    { name: 'P Smith', email: 'hoot1@hoot.com', location: 'San Jose, CA', note:'met at an place', card_image_url:'https://apps.carleton.edu/reason_package/reason_4.0/www/images/273169.jpg', user_id: 1}])
+   contacts = Contact.create([{ name: 'Thomas Wolf', email: 'hoot6@hoot.com', location: 'New York, NY', note:'met at a place', card_image_url:'https://apps.carleton.edu/reason_package/reason_4.0/www/images/273169.jpg', user_id: 1}, 
+    { name: 'P Smith', email: 'hoot3@hoot.com', location: 'San Jose, CA', note:'met at an place', card_image_url:'https://apps.carleton.edu/reason_package/reason_4.0/www/images/273169.jpg', user_id: 1}])
