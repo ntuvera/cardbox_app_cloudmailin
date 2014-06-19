@@ -505,13 +505,14 @@ $(function(){
 
   $('.show-cards').on('click', function(){
     $('#cards-container').fadeIn('slow');
-    $('.delete-card').on('click', function(){
-      // alert('delete card clicked');
-      cardsCollection.delete(this.classList[1]);
-      clearAndDisplayCardsList();
-      clearAndDisplayContactsList();
-    })
   });
+
+  $('.delete-card').on('click', function(){
+      // alert('delete card clicked');
+    cardsCollection.delete(this.classList[1]);
+    clearAndDisplayCardsList();
+    clearAndDisplayContactsList();
+  })
 
   $('.hide-cards').on('click', function(){
     $('#cards-container').fadeOut('fast');

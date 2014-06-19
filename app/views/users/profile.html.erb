@@ -9,7 +9,7 @@
 
 <div id="cards-container" >
   <% current_user.cards.each do |card| %>
-  <div class="saved-card">
+  <div class="saved-card <%= card.email.id %>">
     <div class="card-image">
         <%= image_tag(card.email.attachment_url, class: 'business-card') %>
         <p>" <%= card.email.message %> "</p>
@@ -49,10 +49,10 @@
 </div>
 <div class="wrap">
  <div class="" id="contacts-container">
-    <!-- <img class="featurette-image img-circle pull-right" src="http://placehold.it/512"> 
+    <!-- <img class="featurette-image img-circle pull-right" src="http://placehold.it/512">
     <h2 class="featurette-heading">Contacts<span class="text-muted"></span></h2>
     <p class="lead"></p> -->
-  
+
   </div>
 
 <div id="linkedin-search-container" class="">
