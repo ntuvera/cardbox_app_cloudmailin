@@ -396,7 +396,6 @@ function showContactsOnMap() {
               '<p>location: '+contactPhone+'</p>'+
               '<p>location: '+contactLocation+'</p>'+
               '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
-// here we want a button with the link to the Linkedin profile
               '</div>'+
               '</div>';
 
