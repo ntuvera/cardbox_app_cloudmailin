@@ -1,13 +1,9 @@
 
-<div id='map-canvas'>
-</div>
 
 
-<div id="linkedin-search-container">
-  </div>
 
 
-<div id="cards-container">
+<div id="cards-container" class="featurette">
   <% current_user.cards.each do |card| %>
   <div class="saved-card">
     <div class="card-image">
@@ -47,6 +43,21 @@
 
   <% end %>
 </div>
+<div class="wrap">
+ <div class="featurette" id="contacts-container">
+    <img class="featurette-image img-circle pull-right" src="http://placehold.it/512"> 
+    <h2 class="featurette-heading">Contacts<span class="text-muted"></span></h2>
+    <p class="lead"></p>
+  
+  </div>
 
-<div id='linkedin-network-container'>
+<div id="linkedin-search-container" class="featurette">
+</div>
+<hr class="featurette-divider">
+<div id='linkedin-network-container' class="featurette">
+</div>
+
+  <div id='map-canvas' class="featurette">
+</div>
+
 </div>
