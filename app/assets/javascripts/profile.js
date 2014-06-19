@@ -424,11 +424,11 @@ $(function(){
 
   $('#linkedin-network-container').hide();
 
-  $('#show-linkedin-network').on('click', function(){
+  $('.show-linkedin-network').on('click', function(){
     $('#linkedin-network').fadeIn('slow');
   })
 
-  $('#hide-linked-in-network').on('click', function(){
+  $('.hide-linked-in-network').on('click', function(){
     $('#linkedin-network').fadeOut('slow');
   })
 })
