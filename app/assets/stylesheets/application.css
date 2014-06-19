@@ -80,6 +80,13 @@ body {
   background-color: #F0FFFF;
 }
 
+#contacts-container {
+  display: block;
+  width: 100%;
+
+}
+
+
 .show_contacts{
   margin: 20px;
 }
@@ -100,7 +107,18 @@ body {
   width: 300px;
   height: 200px;
 }
-
+.linked-item {
+  display: inline;
+  width: 20%;
+  float: left;
+  height: 200px;
+  margin: 20px;
+}
+.linked-profiles {
+  height: 500px;
+  overflow: auto;
+  width:60%;
+}
 .contact-card{
 
 }

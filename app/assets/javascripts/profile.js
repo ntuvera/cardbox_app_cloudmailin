@@ -201,7 +201,7 @@ function LinkedInResultView(data){
 }
 
 LinkedInResultView.prototype.render = function(){
-  var $li = $('<li>').addClass('linked-item');
+  var $linkedItem = $('<div>').addClass('linked-item');
   var $nameSpan = $('<p>').addClass('name-span listed').text(this.name);
   var $image = $('<div>').addClass('linked-img listed').html("<img src='"+this.image+"' alt=''>");
   var $linkSpan = $('<p>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'> profile </a>");
@@ -209,12 +209,12 @@ LinkedInResultView.prototype.render = function(){
   var $jobTitleSpan = $('<p>').addClass('job-span listed').text(this.job);
 
   // $li.append('<hr/>')
-  $li.append($image);
-  $li.append($nameSpan);
-  $li.append($linkSpan);
-  $li.append($locationSpan);
-  $li.append($jobTitleSpan);
-  this.el = $li
+  $linkedItem.append($image);
+  $linkedItem.append($nameSpan);
+  $linkedItem.append($linkSpan);
+  $linkedItem.append($locationSpan);
+  $linkedItem.append($jobTitleSpan);
+  this.el = $linkedItem
   return this;
 }
 
@@ -229,8 +229,8 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     success: function(data){
 
     var $div = $('<div>').addClass('linked-profiles');
-    var $ul = $('<ul>').addClass('linked-results');
-    $div.append($ul);
+    var $result = $('<div>').addClass('linked-results');
+    $div.append($result);
     // $('body').append($div);
     $('#linkedin-search-container').append($div);
       for ( idx in data){
