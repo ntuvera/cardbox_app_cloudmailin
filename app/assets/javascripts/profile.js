@@ -195,7 +195,7 @@ ContactsCollection.prototype.fetch = function(){
 function LinkedInResultView(data){
   this.name = data.name;
   this.link = data.page_url;
-  this.image = data.image;
+  this.image = data.image;e
   this.location = data.location;
   this.job = data.job_title;
   // that = this;
@@ -258,23 +258,41 @@ function clearAndDisplayContactsList(){
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    // contactView.render().el;
     $('#contacts-container').append(contactView.render().el).show('slow')
   }
 }
 
-function showContactsOnMap() {
-   // 1. initialize mapOptions
+
+function mapInitialize(){
+
+    // 1. initialize mapOptions
     var mapOptions = {
-          zoom: 2,
-          // center: myLatlng
+          zoom: 3,
+          center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
-
     // 2. get the div to show the map
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+}
 
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+function showContactsOnMap() {
+   // // 1. initialize mapOptions
+   //  var mapOptions = {
+   //        zoom: 2,
+   //        // center: myLatlng
+   //        mapTypeId: google.maps.MapTypeId.ROADMAP
+   //      }
+
+
+   //  // 2. get the div to show the map
+
+   //  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // 3. geocode address into latitude and longitude and drop a marker at that position
     var geocoder = new google.maps.Geocoder();
@@ -349,8 +367,6 @@ $(function(){
 
   contactsCollection.fetch();
 
-
-
   $('.show-contacts').on('click', function(){
     contactsCollection.fetch();
     clearAndDisplayContactsList();
@@ -361,6 +377,7 @@ $(function(){
       contactsCollection.findOnLinkedIn(this.classList[1])
 
     });
+
     $('.delete-contact').on('click', function(){
       contactsCollection.delete(this.classList[1]);
       contactsCollection.fetch();
@@ -380,6 +397,8 @@ $(function(){
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
+      clearAndDisplayCardsList();
+      clearAndDisplayContactsList();
     })
   });
 
@@ -388,19 +407,29 @@ $(function(){
   })
 
   $('.show-contacts-on-map').on('click', function(){
+    mapInitialize();
     showContactsOnMap();
   })
 
-  $('#map-canvas').hide()
+  $('#map-canvas').hide();
 
   $('.show-contacts-on-map').on('click', function(){
-    $('#map-canvas').fadeIn('slow')
+    $('#map-canvas').fadeIn('slow');
   })
 
   $('#contacts-container').hide();
 
   $('.hide-contacts-on-map').on('click', function(){
-    $('#map-canvas').fadeOut('fast')
+    $('#map-canvas').fadeOut('fast');
   })
 
+  $('#linkedin-network-container').hide();
+
+  $('.show-linkedin-network').on('click', function(){
+    $('#linkedin-network-container').fadeIn('slow');
+  })
+
+  $('.hide-linkedin-network').on('click', function(){
+    $('#linkedin-network-container').fadeOut('slow');
+  })
 })

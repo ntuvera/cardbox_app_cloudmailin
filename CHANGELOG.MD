@@ -1,4 +1,5 @@
 Rails App Created **(6-12-2014)**
+
 - Researching useful APIs
 - Utilize Mailgun service to POST to rails app
 
@@ -36,5 +37,11 @@ Rails App Created **(6-12-2014)**
 - Linked in API scraping functional, implementing to application
 
 **(6-18-2014)**
+
+
 - LinkedIn API authorization issues
-- 
+
+- Bootstrap styling
+
+- Refactoring + more Ajax requests
+

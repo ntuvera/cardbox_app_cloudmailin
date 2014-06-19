@@ -40,8 +40,9 @@ body {
   margin-right: 20px;
 }
 #map-canvas {
-  width: 800px;
+/*  width: 800px;*/
   height: 400px;
+  width: 100%;
   border: 1px solid red;
   margin: 50px;
 }

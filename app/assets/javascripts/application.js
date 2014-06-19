@@ -16,10 +16,3 @@
 //= require turbolinks
 //= require profile
 //= require_tree .
-
-
-$(function(){
-  $('#delete-contact').on('click', function(){
-    console.log('delete button clicked');
-  })
-})
