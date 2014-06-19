@@ -2,22 +2,6 @@
 <!-- if the current_user has supplied a pin, then hide a field
     otherwise, render a field and prompt to input the key.  save the pin to
     the database.  -->
-<% if @connections %>
-  <ul>
-      <% @connections['all'].each do |connection| %>
-      <li class='connection'>
-        <div class='image'>
-          <%= image_tag connection['picture_url'] %>
-        </div>
-        <div>
-          <a href="<%= connection['site_standard_profile_request']['url'] %>"><%= connection['first_name'] + " " + connection['last_name'] %></a><br>
-          <%= connection['location']['name'] %>
-        </div>
-      </li>
-      <% end %>
-  </ul>
-<% end %>
-<hr>
 
 
 <!-- <button class="show-cards">Show Saved Cards</button>

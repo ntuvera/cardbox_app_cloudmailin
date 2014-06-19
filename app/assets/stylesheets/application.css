@@ -73,6 +73,7 @@ body {
 #my_avatar{
   height: 70px;
   width: 70px;
+  margin-left: 4em;
 }
 #cards-container{
   display:inline-block;

@@ -21,6 +21,8 @@
             <li class='navbar hide-contacts'><a>Hide Contacts</a></li>
             <li class='navbar show-contacts-on-map'><a>Show Map</a></li>
             <li class='navbar hide-contacts-on-map'><a>Hide Map</a></li>
+            <li class='navbar show-linkedin-network'><a>Map Connections</a></li>
+            <li class='navbar hide-linkedin-network'><a>Hide Connections</a></li>
     <li>
     <!-- <div class="img" id="me"> -->
 
@@ -30,7 +32,7 @@
         <img id="my_avatar" src="<%=asset_url('navatar.jpg')%>" alt="Profile Picture" />
       <% end %>
     </li>
-    <li>
+    <li style='margin-top:.7em; padding-left:.5em'>
     <%= current_user.email %>
     <%= link_to "LogOut", logout_path, method: :delete %>
   </li>

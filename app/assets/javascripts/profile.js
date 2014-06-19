@@ -195,7 +195,7 @@ ContactsCollection.prototype.fetch = function(){
 function LinkedInResultView(data){
   this.name = data.name;
   this.link = data.page_url;
-  this.image = data.image;e
+  this.image = data.image;
   this.location = data.location;
   this.job = data.job_title;
   // that = this;
