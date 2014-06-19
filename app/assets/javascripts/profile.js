@@ -500,7 +500,7 @@ $(function(){
   })
 
 
-  $('#cards-container').hide();
+  // $('#cards-container').hide();
 
 
   $('.show-cards').on('click', function(){
