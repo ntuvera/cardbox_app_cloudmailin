@@ -193,7 +193,7 @@ ContactsCollection.prototype.fetch = function(){
 function LinkedInResultView(data){
   this.name = data.name;
   this.link = data.page_url;
-  this.image = data.image;
+  this.image = data.image;e
   this.location = data.location;
   this.job = data.job_title;
   // that = this;
@@ -338,7 +338,6 @@ function clearAndDisplayContactsList(){
   for(idx in contactsCollection.models){
     var contact     = contactsCollection.models[idx];
     var contactView = new ContactView(contact);
-    // contactView.render().el;
     $('#contacts-container').append(contactView.render().el).show('slow')
   }
 }
@@ -353,6 +352,7 @@ function showContactsOnMap() {
           center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
           mapTypeId: google.maps.MapTypeId.ROADMAP          
         }   
+
 
     // 2. get the div to show the map
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -505,8 +505,8 @@ $(function(){
     $('.delete-card').on('click', function(){
       alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
-    clearAndDisplayCardsList();    
-    clearAndDisplayContactsList();  
+      clearAndDisplayCardsList();
+      clearAndDisplayContactsList();
     })
   });
 
@@ -518,16 +518,16 @@ $(function(){
     showContactsOnMap();
   })
 
-  $('#map-canvas').hide()
+  $('#map-canvas').hide();
 
   $('.show-contacts-on-map').on('click', function(){
-    $('#map-canvas').fadeIn('slow')
+    $('#map-canvas').fadeIn('slow');
   })
 
   $('#contacts-container').hide();
 
   $('.hide-contacts-on-map').on('click', function(){
-    $('#map-canvas').fadeOut('fast')
+    $('#map-canvas').fadeOut('fast');
   })
 
 
@@ -538,11 +538,11 @@ $(function(){
     $('#linkedin-network-container').fadeIn('slow')
   })
 
- $('.hide-linkedin-connections').on('click', function(){
+  $('.hide-linkedin-connections').on('click', function(){
     $('#linkedin-network-container').fadeOut('fast')
   })
 
-// this is not being used at the moment, because of Google geocoding requests limitations
+  // this is not being used at the moment, because of Google geocoding requests limitations
   // $('.show-linkedin-connections-on-map').on('click', function(){  
   //   contactsCollection.showLinkedInNetworkOnMap();     
   // })
@@ -550,6 +550,5 @@ $(function(){
   // $('.hide-linkedin-connections-on-map').on('click', function(){  
   //    $('#map-linkedin-network').fadeOut('fast') 
   // })
-
 
 })
