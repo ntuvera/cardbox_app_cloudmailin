@@ -399,10 +399,7 @@ function showContactsOnMap() {
               '<p>email: <a href="mailto:'+contactEmail+'" target="_top">'+contactEmail+'</a></p>'+
               '<p>location: '+contactPhone+'</p>'+
               '<p>location: '+contactLocation+'</p>'+
-
-              '<p><a href="'+contactCardImageUrl+'" target="_blank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
-              $profilesButton+
-
+              '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
               '</div>'+
               '</div>';
 
