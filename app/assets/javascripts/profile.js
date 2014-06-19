@@ -30,7 +30,7 @@ function CardsCollection(){
 
 CardsCollection.prototype.add = function(cardJSON){
   var newCard = new Card(cardJSON);
-  this.models[cardJSON.id] = newCard; 
+  this.models[cardJSON.id] = newCard;
   return this;
 }
 
@@ -171,7 +171,7 @@ ContactsCollection.prototype.delete = function(contact){
 
 ContactsCollection.prototype.add = function(contactJSON){
   var newContact = new Contact(contactJSON);
-  this.models[contactJSON.id] = newContact;  
+  this.models[contactJSON.id] = newContact;
   return this;
 };
 
@@ -255,24 +255,24 @@ function LinkedInConnectionsView(data){
   this.lastname = data.last_name;
   this.link = data.site_standard_profile_request.url;
   this.image = data.picture_url;
-  this.location = data.location.name;  
+  this.location = data.location.name;
   // that = this;
   this.el = undefined;
 }
 
 LinkedInConnectionsView.prototype.render = function(){
   var $li = $('<li>').addClass('linked-item');
-  var $nameSpan = $('<p>').addClass('name-span listed').text(this.firstname + " " + this.lastname); 
+  var $nameSpan = $('<p>').addClass('name-span listed').text(this.firstname + " " + this.lastname);
   var $image = $('<div>').addClass('linked-img listed').html("<img src='"+this.image+"' alt=''>");
   var $linkSpan = $('<p>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'> profile </a>");
-  var $locationSpan = $('<p>').addClass('location-span listed').text(this.location);  
+  var $locationSpan = $('<p>').addClass('location-span listed').text(this.location);
   var $a = $('<a>').attr('href',this.link).attr('target', '_blank');
   var $img = $('<img>').attr('src',this.image)
-  
+
   $li.append($a);
   $a.append($img);
   $li.append($nameSpan)
-  $li.append($locationSpan);  
+  $li.append($locationSpan);
   this.el = $li
   return this;
 }
@@ -281,21 +281,21 @@ LinkedInConnectionsView.prototype.render = function(){
 ContactsCollection.prototype.showLinkedInNetwork = function(contact){
 
   var that = this;
-  
+
   $.ajax({
     url: '/profile',
     method: 'GET',
     dataType: 'json',
     success: function(data){
-     
+
     var $div = $('<div>').addClass('linked-profiles');
     var $ul = $('<ul>').addClass('linked-results');
     $div.append($ul);
- 
+
     $('#linkedin-network-container').append($div);
 
     for(idx in data.all){
-        console.log(data.all[idx]);       
+        console.log(data.all[idx]);
         var newPerson = new LinkedInConnectionsView(data.all[idx]);
 
         $('.linked-results').append(newPerson.render().el)
@@ -313,7 +313,7 @@ ContactsCollection.prototype.showLinkedInNetwork = function(contact){
 ContactsCollection.prototype.showLinkedInNetworkOnMap = function(contact){
 
   var that = this;
-  
+
   $.ajax({
     url: '/profile',
     method: 'GET',
@@ -323,7 +323,7 @@ ContactsCollection.prototype.showLinkedInNetworkOnMap = function(contact){
       // for ( idx in data){
       //     console.log(data[idx])
       // };
-      showLinkedinNetworkOnMap(data);  
+      showLinkedinNetworkOnMap(data);
     },
     error: function(){
 
@@ -350,8 +350,8 @@ function showContactsOnMap() {
     var mapOptions = {
           zoom: 3,
           center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
-          mapTypeId: google.maps.MapTypeId.ROADMAP          
-        }   
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
 
 
     // 2. get the div to show the map
@@ -362,7 +362,7 @@ function showContactsOnMap() {
 
 
     // 4. loop through all the contacts  // ===>>  NOT MORE THAN 10, BECAUSE OF GOOGLE'S LIMITATIONS
-    for(idx in contactsCollection.models){ //===>> LATER: get all Linkedin contacts, store latitude and longitude in database 
+    for(idx in contactsCollection.models){ //===>> LATER: get all Linkedin contacts, store latitude and longitude in database
 
       var contact = contactsCollection.models[idx];
 
@@ -431,24 +431,24 @@ function showLinkedinNetworkOnMap(data) {
     var mapOptions = {
           zoom: 3,
           center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
-          mapTypeId: google.maps.MapTypeId.ROADMAP          
-        }   
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
 
     // 2. get the div to show the map
     map = new google.maps.Map(document.getElementById("map-linkedin-network"), mapOptions);
 
     // 3. geocode address into latitude and longitude and drop a marker at that position
-    var geocoder = new google.maps.Geocoder();    
+    var geocoder = new google.maps.Geocoder();
 
     // 4. loop through all the Linkedin network contacts  // ===>>  LIMITED TO 10 FOR NOW, BECAUSE OF GOOGLE'S LIMITATIONS
-    // for(idx in data.all){  ===>> LATER: get all Linkedin contacts, store latitude and longitude in database 
+    // for(idx in data.all){  ===>> LATER: get all Linkedin contacts, store latitude and longitude in database
 
     for (i = 0; i < 9; i++){
-      var contactLocation = data.all[i]['location']['name'];   
+      var contactLocation = data.all[i]['location']['name'];
       console.log("contact location: ", contactLocation);
 
-      (function(contactLocation){     
-        geocoder.geocode( {'address': contactLocation}, function(results, status) {     
+      (function(contactLocation){
+        geocoder.geocode( {'address': contactLocation}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
 
             map.setCenter(results[0].geometry.location);
@@ -462,7 +462,7 @@ function showLinkedinNetworkOnMap(data) {
             alert("Geocode was not successful for the following reason: " + status);
           }
         });
-      })(contactLocation); 
+      })(contactLocation);
 
     } // end for
 }
@@ -506,7 +506,7 @@ $(function(){
   $('.show-cards').on('click', function(){
     $('#cards-container').fadeIn('slow');
     $('.delete-card').on('click', function(){
-      alert('delete card clicked');
+      // alert('delete card clicked');
       cardsCollection.delete(this.classList[1]);
       clearAndDisplayCardsList();
       clearAndDisplayContactsList();
@@ -536,7 +536,7 @@ $(function(){
 
   $('#linkedin-network-container').hide();
 
-  $('.show-linkedin-connections').on('click', function(){    
+  $('.show-linkedin-connections').on('click', function(){
     contactsCollection.showLinkedInNetwork();
     $('#linkedin-network-container').fadeIn('slow')
   })
@@ -545,13 +545,17 @@ $(function(){
     $('#linkedin-network-container').fadeOut('fast')
   })
 
+$(".hide-linkedin-connections").click(function(){
+  $('#linkedin-search-container').toggle();
+});
+
   // this is not being used at the moment, because of Google geocoding requests limitations
-  // $('.show-linkedin-connections-on-map').on('click', function(){  
-  //   contactsCollection.showLinkedInNetworkOnMap();     
+  // $('.show-linkedin-connections-on-map').on('click', function(){
+  //   contactsCollection.showLinkedInNetworkOnMap();
   // })
 
-  // $('.hide-linkedin-connections-on-map').on('click', function(){  
-  //    $('#map-linkedin-network').fadeOut('fast') 
+  // $('.hide-linkedin-connections-on-map').on('click', function(){
+  //    $('#map-linkedin-network').fadeOut('fast')
   // })
 
 })
