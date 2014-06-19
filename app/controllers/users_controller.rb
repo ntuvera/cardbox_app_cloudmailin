@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     if current_user.provider == "linkedin"  
       linkedin_client.authorize_from_access(current_user.linkedin_accesskey1, current_user.linkedin_accesskey2)    
       @connections = linkedin_client.connections 
+      respond_to do |format|
+        format.json { render :json => @connections.to_json }
+        format.html
+      end
     end
   end
 

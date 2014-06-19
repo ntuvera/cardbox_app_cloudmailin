@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618195546) do
+ActiveRecord::Schema.define(version: 20140618230610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20140618195546) do
     t.string   "card_image_url"
     t.datetime "card_received_date"
     t.integer  "user_id"
+    t.string   "latitude"
+    t.string   "longitude"
   end
 
   create_table "emails", force: true do |t|
