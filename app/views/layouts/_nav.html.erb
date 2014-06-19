@@ -1,6 +1,6 @@
 <div class="navbar-wrapper">
 <div class="container">
-    <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar navbar-static-top">
       
         <div class="navbar-header">
       <!-- <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -12,23 +12,15 @@
         </div>
         <div class="navbar-collapse collapse">
 
-          <ul class="nav navbar-nav">
-            <li class=""><a href="#">Home</a></li>
-            <li><a href="http://www.bootply.com" target="ext">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <!-- <li class=""><a href="#">Show Saved Cards</a></li>
-            <li class="navbar hide-cards"><a>Hide Saved Cards</a></li>
-            <li class='navbar show-contacts'><a>Show Contacts</a></li>
-            <li class='navbar hide-contacts'><a>Hide Contacts</a></li>
-            <li class='navbar show-contacts-on-map'><a>Show Contacts on Map</a></li>
-            <li class='navbar hide-contacts-on-map'><a>Hide Contacts on Map</a></li> -->
+          <ul class="nav nav-pils">
+       
             <% if current_user %>
-            <li class=""><a href="#">Show Saved Cards</a></li>
-            <li class="navbar hide-cards"><a>Hide Saved Cards</a></li>
+            <li class=""><a>Show Cards</a></li>
+            <li class="navbar hide-cards"><a >Hide Cards</a></li>
             <li class='navbar show-contacts'><a>Show Contacts</a></li>
             <li class='navbar hide-contacts'><a>Hide Contacts</a></li>
-            <li class='navbar show-contacts-on-map'><a>Show Contacts on Map</a></li>
-            <li class='navbar hide-contacts-on-map'><a>Hide Contacts on Map</a></li>
+            <li class='navbar show-contacts-on-map'><a>Show Map</a></li>
+            <li class='navbar hide-contacts-on-map'><a>Hide Map</a></li>
     <li>
     <!-- <div class="img" id="me"> -->
 
@@ -39,7 +31,7 @@
       <% end %>
     </li>
     <li>
-    <%= current_user.email %> is logged in.
+    <%= current_user.email %>
     <%= link_to "LogOut", logout_path, method: :delete %>
   </li>
       <% else %>
@@ -48,25 +40,15 @@
         <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %> </li><li>
         <%= link_to 'LogIn', login_path %>
       </li>
-    <!-- </div> -->
+    </div>
 
   <% end %>
-            <!-- <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li> -->
+           
           </ul>
         </div>
 
     </div>
   </div><!-- /container -->
   </div><!-- /navbar wrapper -->
-  <div class="pad" style="margin-bottom:64px"></div>
+  <div class="pad" style="margin-bottom:100px"></div>
  
