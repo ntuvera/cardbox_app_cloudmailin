@@ -40,4 +40,8 @@ Rails App Created **(6-12-2014)**
 
 
 - LinkedIn API authorization issues
+
 - Bootstrap styling
+
+- Refactoring + more Ajax requests
+
