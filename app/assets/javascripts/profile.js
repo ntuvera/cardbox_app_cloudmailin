@@ -195,7 +195,7 @@ ContactsCollection.prototype.fetch = function(){
 function LinkedInResultView(data){
   this.name = data.name;
   this.link = data.page_url;
-  this.image = data.image;
+  this.image = data.image;e
   this.location = data.location;
   this.job = data.job_title;
   // that = this;
@@ -410,16 +410,25 @@ $(function(){
     showContactsOnMap();
   })
 
-  $('#map-canvas').hide()
+  $('#map-canvas').hide();
 
   $('.show-contacts-on-map').on('click', function(){
-    $('#map-canvas').fadeIn('slow')
+    $('#map-canvas').fadeIn('slow');
   })
 
   $('#contacts-container').hide();
 
   $('.hide-contacts-on-map').on('click', function(){
-    $('#map-canvas').fadeOut('fast')
+    $('#map-canvas').fadeOut('fast');
   })
 
+  $('#linkedin-network-container').hide();
+
+  $('#show-linkedin-network').on('click', function(){
+    $('#linkedin-network').fadeIn('slow');
+  })
+
+  $('#hide-linked-in-network').on('click', function(){
+    $('#linkedin-network').fadeOut('slow');
+  })
 })
