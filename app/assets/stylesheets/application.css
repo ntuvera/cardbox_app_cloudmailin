@@ -39,7 +39,7 @@ body {
   margin-left: 20px;
   margin-right: 20px;
 }
-#map-canvas {
+#map-canvas, #map-linkedin-network {
 /*  width: 800px;*/
   height: 400px;
   height: 100%;

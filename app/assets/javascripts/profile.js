@@ -30,8 +30,7 @@ function CardsCollection(){
 
 CardsCollection.prototype.add = function(cardJSON){
   var newCard = new Card(cardJSON);
-  this.models[cardJSON.id] = newCard;
-  $(this).trigger('addCardFlare');
+  this.models[cardJSON.id] = newCard; 
   return this;
 }
 
@@ -172,8 +171,7 @@ ContactsCollection.prototype.delete = function(contact){
 
 ContactsCollection.prototype.add = function(contactJSON){
   var newContact = new Contact(contactJSON);
-  this.models[contactJSON.id] = newContact;
-  $(this).trigger('addFlare');
+  this.models[contactJSON.id] = newContact;  
   return this;
 };
 
@@ -200,8 +198,8 @@ function LinkedInResultView(data){
   this.job = data.job_title;
   // that = this;
   this.el = undefined;
-
 }
+
 LinkedInResultView.prototype.render = function(){
   var $li = $('<li>').addClass('linked-item');
   var $nameSpan = $('<p>').addClass('name-span listed').text(this.name);
@@ -218,7 +216,6 @@ LinkedInResultView.prototype.render = function(){
   $li.append($jobTitleSpan);
   this.el = $li
   return this;
-
 }
 
 ContactsCollection.prototype.findOnLinkedIn = function(contact){
@@ -234,7 +231,8 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
     var $div = $('<div>').addClass('linked-profiles');
     var $ul = $('<ul>').addClass('linked-results');
     $div.append($ul);
-    $('body').append($div);
+    // $('body').append($div);
+    $('#linkedin-search-container').append($div);
       for ( idx in data){
         console.log(data[idx])
         // $('body').append($('<li>').html(data[idx].name))
@@ -244,6 +242,88 @@ ContactsCollection.prototype.findOnLinkedIn = function(contact){
         $('.linked-results').append(newPerson.render().el)
         $('.linked-results').append('<hr/>')
       }
+    },
+    error: function(){
+
+    }
+  });
+}
+
+
+function LinkedInConnectionsView(data){
+  this.firstname = data.first_name;
+  this.lastname = data.last_name;
+  this.link = data.site_standard_profile_request.url;
+  this.image = data.picture_url;
+  this.location = data.location.name;  
+  // that = this;
+  this.el = undefined;
+}
+
+LinkedInConnectionsView.prototype.render = function(){
+  var $li = $('<li>').addClass('linked-item');
+  var $nameSpan = $('<p>').addClass('name-span listed').text(this.firstname + " " + this.lastname); 
+  var $image = $('<div>').addClass('linked-img listed').html("<img src='"+this.image+"' alt=''>");
+  var $linkSpan = $('<p>').addClass('link-span listed').html("<a href='"+this.link+"' target='_blank'> profile </a>");
+  var $locationSpan = $('<p>').addClass('location-span listed').text(this.location);  
+  var $a = $('<a>').attr('href',this.link).attr('target', '_blank');
+  var $img = $('<img>').attr('src',this.image)
+  
+  $li.append($a);
+  $a.append($img);
+  $li.append($nameSpan)
+  $li.append($locationSpan);  
+  this.el = $li
+  return this;
+}
+
+
+ContactsCollection.prototype.showLinkedInNetwork = function(contact){
+
+  var that = this;
+  
+  $.ajax({
+    url: '/profile',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data){
+     
+    var $div = $('<div>').addClass('linked-profiles');
+    var $ul = $('<ul>').addClass('linked-results');
+    $div.append($ul);
+ 
+    $('#linkedin-network-container').append($div);
+
+    for(idx in data.all){
+        console.log(data.all[idx]);       
+        var newPerson = new LinkedInConnectionsView(data.all[idx]);
+
+        $('.linked-results').append(newPerson.render().el)
+        $('.linked-results').append('<hr/>')
+      }
+    },
+    error: function(){
+
+    }
+  });
+
+}
+
+
+ContactsCollection.prototype.showLinkedInNetworkOnMap = function(contact){
+
+  var that = this;
+  
+  $.ajax({
+    url: '/profile',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data){
+      // console.log("inside the fetchLinkedInNetwork callback function");
+      // for ( idx in data){
+      //     console.log(data[idx])
+      // };
+      showLinkedinNetworkOnMap(data);  
     },
     error: function(){
 
@@ -264,58 +344,40 @@ function clearAndDisplayContactsList(){
 }
 
 
-function mapInitialize(){
+
+function showContactsOnMap() {
 
     // 1. initialize mapOptions
     var mapOptions = {
           zoom: 3,
           center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
           mapTypeId: google.maps.MapTypeId.ROADMAP          
-        }
+        }   
 
     // 2. get the div to show the map
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-}
-
-
-function showContactsOnMap() {
-   // // 1. initialize mapOptions
-   //  var mapOptions = {
-   //        zoom: 2,
-   //        // center: myLatlng
-   //        mapTypeId: google.maps.MapTypeId.ROADMAP
-   //      }
-
-
-   //  // 2. get the div to show the map
-
-   //  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
     // 3. geocode address into latitude and longitude and drop a marker at that position
     var geocoder = new google.maps.Geocoder();
 
 
-    // 4. loop through all the contacts
-    for(idx in contactsCollection.models){
+    // 4. loop through all the contacts  // ===>>  NOT MORE THAN 10, BECAUSE OF GOOGLE'S LIMITATIONS
+    for(idx in contactsCollection.models){ //===>> LATER: get all Linkedin contacts, store latitude and longitude in database 
 
       var contact = contactsCollection.models[idx];
 
       var contactLocation = contact.location;
       // console.log("contact location: ", contactLocation);
 
-
       // self calling function, that takes all the parameters for the marker/infowindow
       // !!!
       (function(contactLocation, contactName, contactEmail, contactCardImageUrl, contactPhone){
         geocoder.geocode( {'address': contactLocation}, function(results, status) {
 
-
         // drop the marker (Callback function)
         if (status == google.maps.GeocoderStatus.OK) {
+            console.log(results[0].geometry.location.k)
+            console.log(results[0].geometry.location.A)
 
             map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
@@ -334,7 +396,7 @@ function showContactsOnMap() {
               '<p>location: '+contactPhone+'</p>'+
               '<p>location: '+contactLocation+'</p>'+
               '<p><a href="'+contactCardImageUrl+'" target="_bank"><img style="width:80px;"src='+contactCardImageUrl+' alt="Business Card" /></a></p>'+
-
+// here we want a button with the link to the Linkedin profile
               '</div>'+
               '</div>';
 
@@ -356,6 +418,52 @@ function showContactsOnMap() {
 
      } // end for
 }
+
+
+
+
+function showLinkedinNetworkOnMap(data) {
+
+    // 1. initialize mapOptions
+    var mapOptions = {
+          zoom: 3,
+          center: new google.maps.LatLng(39.809734, -98.555620), // Lebanon, Kansas (center of the USA)
+          mapTypeId: google.maps.MapTypeId.ROADMAP          
+        }   
+
+    // 2. get the div to show the map
+    map = new google.maps.Map(document.getElementById("map-linkedin-network"), mapOptions);
+
+    // 3. geocode address into latitude and longitude and drop a marker at that position
+    var geocoder = new google.maps.Geocoder();    
+
+    // 4. loop through all the Linkedin network contacts  // ===>>  LIMITED TO 10 FOR NOW, BECAUSE OF GOOGLE'S LIMITATIONS
+    // for(idx in data.all){  ===>> LATER: get all Linkedin contacts, store latitude and longitude in database 
+
+    for (i = 0; i < 9; i++){
+      var contactLocation = data.all[i]['location']['name'];   
+      console.log("contact location: ", contactLocation);
+
+      (function(contactLocation){     
+        geocoder.geocode( {'address': contactLocation}, function(results, status) {     
+        if (status == google.maps.GeocoderStatus.OK) {
+
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location,
+              animation: google.maps.Animation.DROP,
+              title: contactLocation
+            });
+          } else {
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+        });
+      })(contactLocation); 
+
+    } // end for
+}
+
 
 
 var contactsCollection = new ContactsCollection();
@@ -407,7 +515,6 @@ $(function(){
   })
 
   $('.show-contacts-on-map').on('click', function(){
-    mapInitialize();
     showContactsOnMap();
   })
 
@@ -422,5 +529,27 @@ $(function(){
   $('.hide-contacts-on-map').on('click', function(){
     $('#map-canvas').fadeOut('fast')
   })
+
+
+  $('#linkedin-network-container').hide();
+
+  $('.show-linkedin-connections').on('click', function(){    
+    contactsCollection.showLinkedInNetwork();
+    $('#linkedin-network-container').fadeIn('slow')
+  })
+
+ $('.hide-linkedin-connections').on('click', function(){
+    $('#linkedin-network-container').fadeOut('fast')
+  })
+
+// this is not being used at the moment, because of Google geocoding requests limitations
+  // $('.show-linkedin-connections-on-map').on('click', function(){  
+  //   contactsCollection.showLinkedInNetworkOnMap();     
+  // })
+
+  // $('.hide-linkedin-connections-on-map').on('click', function(){  
+  //    $('#map-linkedin-network').fadeOut('fast') 
+  // })
+
 
 })
