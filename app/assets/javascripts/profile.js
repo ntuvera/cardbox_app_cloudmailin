@@ -425,10 +425,10 @@ $(function(){
   $('#linkedin-network-container').hide();
 
   $('.show-linkedin-network').on('click', function(){
-    $('#linkedin-network').fadeIn('slow');
+    $('#linkedin-network-container').fadeIn('slow');
   })
 
-  $('.hide-linked-in-network').on('click', function(){
-    $('#linkedin-network').fadeOut('slow');
+  $('.hide-linkedin-network').on('click', function(){
+    $('#linkedin-network-container').fadeOut('slow');
   })
 })
