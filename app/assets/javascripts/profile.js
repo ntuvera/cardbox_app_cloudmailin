@@ -369,6 +369,10 @@ function showContactsOnMap() {
       var contactLocation = contact.location;
       // console.log("contact location: ", contactLocation);
 
+
+      var $profilesButton = $('<button>').attr('class', 'find-contact '+contact.id).html('find on Linkedin');
+
+
       // self calling function, that takes all the parameters for the marker/infowindow
       // !!!
       (function(contactLocation, contactName, contactEmail, contactCardImageUrl, contactPhone){

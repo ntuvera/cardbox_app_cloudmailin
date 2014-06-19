@@ -4,40 +4,43 @@
   <title>Business Cards Organizer</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <%= csrf_meta_tags %> 
 
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6Cb5j7ll1l-WDHDG8vPjnfZxJpd5I_cI">
   </script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="/bootstrap/img/favicon.ico">
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+
 
 </head>
 <body>
   <header>
-    <h1>Welcome to the Future - Business Cards Organizer</h1>
+   
   </header>
 
-  <% if current_user %>
-
-    <div class="img" id="me">
-
-      <% if current_user.image_url %>
-      <img id="my_avatar" src="<%= current_user.image_url %>" alt="Profile Picture" />
-      <% else %>
-        <img id="my_avatar" src="<%=asset_url('navatar.jpg')%>" alt="Profile Picture" />
-      <% end %>
-
-    <%= current_user.email %> is logged in.
-    <%= link_to "LogOut", logout_path, method: :delete %>
-      <% else %>
-        <%= link_to 'SignUp', signup_path %> or
-        <%= link_to "Sign in with Linkedin", "/auth/linkedin", id: "sign_in" %> or
-        <%= link_to 'LogIn', login_path %>
-    </div>
-
-  <% end %>
 
 
+<%= render "/layouts/nav" %>
+
+  
+
+
+  <%= yield %>
+<!-- *************BOOOTTTTTSSSSTRRAAAPPP******** -->
+
+
+<!-- 
   <div class="navigation-bar">
     <button class="navbar show-cards">Show Saved Cards</button>
     <button class="navbar hide-cards">Hide Saved Cards</button>
@@ -46,12 +49,259 @@
     <button class='navbar show-contacts-on-map'>Show Contacts on Map</button>
     <button class='navbar hide-contacts-on-map'>Hide Contacts on Map</button>
     <button class='navbar show-linkedin-connections'>Show Linkedin Connections</button>
-    <button class='navbar hide-linkedin-connections'>Hide Linkedin Connections</button>
+    <button class='navbar hide-linkedin-connections'>Hide Linkedin Connections</button> -->
    <!--  <button class='navbar show-linkedin-connections-on-map'>Show Linkedin Connections on Map</button> -->
    <!--  <button class='navbar hide-linkedin-connections-on-map'>Hide Linkedin Connections on Map</button> -->
   </div>
 
-  <%= yield %>
 
+
+
+
+
+        <!-- CSS code from Bootply.com editor -->
+        
+        <style type="text/css">
+            /* BOOTSTRAP 3.x GLOBAL STYLES
+-------------------------------------------------- */
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+
+  background-color:;
+ 
+}
+
+
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: white;
+  opacity: .8;
+  color: ;
+}
+.navbar-static-top {
+border-radius: 0;
+display: inline;
+}
+
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 1;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 400px;
+  background-color:#555;
+}
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 400px;
+}
+
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+.featurette {
+  padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+  overflow: hidden; /* Vertically center images part 2: clear their floats. */
+}
+.featurette-image {
+  margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+}
+
+/* Give some space on the sides of the floated elements so text doesn't run right into it. */
+.featurette-image.pull-left {
+  margin-right: 40px;
+}
+.featurette-image.pull-right {
+  margin-left: 40px;
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+  /* Remve the edge padding needed for mobile */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: -30px;
+    margin-left: -60px;
+    margin-bottom: 0px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+  }
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 0px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+}
+
+        </style>
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+       
+
+  <hr class="featurette-divider">
+
+  <div class="featurette" id="contacts-container">
+    <!-- <img class="featurette-image img-circle pull-right" src="http://placehold.it/512">
+    <h2 class="featurette-heading">Responsive Design. <span class="text-muted">It'll blow your mind.</span></h2>
+    <p class="lead"></p> -->
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="featurette">
+    <!-- <img class="featurette-image img-circle pull-left" src="http://placehold.it/512">
+    <h2 class="featurette-heading">Smaller Footprint. <span class="text-muted">Lightweight.</span></h2> -->
+    <!-- <p class="lead"></p> -->
+  </div>
+
+  <hr class="featurette-divider">
+
+  <div class="featurette">
+    <img class="featurette-image img-circle pull-right" src="http://placehold.it/512">
+    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Flatness.</span></h2>
+    <!-- <p class="lead"></p> -->
+  </div>
+
+  <hr class="featurette-divider">
+
+  <!-- /END THE FEATURETTES -->
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>This Bootstrap layout is compliments of Bootply. · <a href="http://www.bootply.com/62603">Edit on Bootply.com</a></p>
+  </footer>
+
+</div><!-- /.container -->
+        
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+        
+        <!-- JavaScript jQuery code from Bootply.com editor  -->
+        
+        <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            
+        
+        });
+        
+        </script>
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-40413119-1', 'bootply.com');
+          ga('send', 'pageview');
+        </script>
+        <!-- Quantcast Tag -->
+        <script type="text/javascript">
+        var _qevents = _qevents || [];
+        
+        (function() {
+        var elem = document.createElement('script');
+        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+        elem.async = true;
+        elem.type = "text/javascript";
+        var scpt = document.getElementsByTagName('script')[0];
+        scpt.parentNode.insertBefore(elem, scpt);
+        })();
+        
+        _qevents.push({
+        qacct:"p-0cXb7ATGU9nz5"
+        });
+        </script>
+    </body>
+</html>
+<!-- *************BOOOTTTTTSSSSTRRAAAPPP******** -->
 </body>
 </html>

@@ -71,8 +71,9 @@ body {
   display: inline;
 }
 #my_avatar{
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
+  margin-left: 4em;
 }
 #cards-container{
   display:inline-block;
@@ -110,6 +111,16 @@ body {
   clear: both;
 }
 
+/* bootstrap stuff */
+
+/*carousel*/
+.carousel-control {
+position: absolute;
+top: 25px !important;
+}
+.carousel-indicators {
+z-index: 8 !important;
+}
 
 
 
